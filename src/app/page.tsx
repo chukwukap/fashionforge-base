@@ -6,6 +6,8 @@ import { FeaturesSection } from "./_components/features-section";
 import Designers from "./_components/designers-section";
 import { CallToAction } from "./_components/call-to-action";
 import { HowItWorks } from "./_components/How-it-works";
+import { FeaturedDesigns } from "./_components/featured-designs";
+import { DesignerSpotlight } from "./_components/designer-spotlight";
 
 export default function Home() {
   return (
@@ -13,6 +15,8 @@ export default function Home() {
       <HeroSection />
       <FeaturesSection />
       <HowItWorks />
+      <FeaturedDesigns />
+      <DesignerSpotlight />
       <Designers />
       <CallToAction />
     </div>
