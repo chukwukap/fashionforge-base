@@ -4,65 +4,65 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 20 14.3% 4.1%;
+    --background: 60 9% 98%; /* stone-50 */
+    --foreground: 20 14.3% 4.1%; /* stone-900 */
 
     --card: 0 0% 100%;
-    --card-foreground: 20 14.3% 4.1%;
+    --card-foreground: 20 14.3% 4.1%; /* stone-900 */
 
     --popover: 0 0% 100%;
-    --popover-foreground: 20 14.3% 4.1%;
+    --popover-foreground: 20 14.3% 4.1%; /* stone-900 */
 
-    --primary: 24 9.8% 10%;
-    --primary-foreground: 60 9.1% 97.8%;
+    --primary: 43 96% 56%; /* amber-400 */
+    --primary-foreground: 20 14.3% 4.1%; /* stone-900 */
 
-    --secondary: 60 4.8% 95.9%;
-    --secondary-foreground: 24 9.8% 10%;
+    --secondary: 60 4.8% 95.9%; /* stone-100 */
+    --secondary-foreground: 24 9.8% 10%; /* stone-800 */
 
-    --muted: 60 4.8% 95.9%;
-    --muted-foreground: 25 5.3% 44.7%;
+    --muted: 60 4.8% 95.9%; /* stone-100 */
+    --muted-foreground: 25 5.3% 44.7%; /* stone-500 */
 
-    --accent: 60 4.8% 95.9%;
-    --accent-foreground: 24 9.8% 10%;
+    --accent: 43 96% 56%; /* amber-400 */
+    --accent-foreground: 20 14.3% 4.1%; /* stone-900 */
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 60 9.1% 97.8%;
+    --destructive-foreground: 60 9.1% 97.8%; /* stone-50 */
 
-    --border: 20 5.9% 90%;
-    --input: 20 5.9% 90%;
-    --ring: 20 14.3% 4.1%;
+    --border: 20 5.9% 90%; /* stone-200 */
+    --input: 20 5.9% 90%; /* stone-200 */
+    --ring: 43 96% 56%; /* amber-400 */
 
     --radius: 0.5rem;
   }
 
   .dark {
-    --background: 20 14.3% 4.1%;
-    --foreground: 60 9.1% 97.8%;
+    --background: 20 14.3% 4.1%; /* stone-900 */
+    --foreground: 60 9.1% 97.8%; /* stone-50 */
 
-    --card: 20 14.3% 4.1%;
-    --card-foreground: 60 9.1% 97.8%;
+    --card: 24 9.8% 10%; /* stone-800 */
+    --card-foreground: 60 9.1% 97.8%; /* stone-50 */
 
-    --popover: 20 14.3% 4.1%;
-    --popover-foreground: 60 9.1% 97.8%;
+    --popover: 24 9.8% 10%; /* stone-800 */
+    --popover-foreground: 60 9.1% 97.8%; /* stone-50 */
 
-    --primary: 60 9.1% 97.8%;
-    --primary-foreground: 24 9.8% 10%;
+    --primary: 43 96% 56%; /* amber-400 */
+    --primary-foreground: 20 14.3% 4.1%; /* stone-900 */
 
-    --secondary: 12 6.5% 15.1%;
-    --secondary-foreground: 60 9.1% 97.8%;
+    --secondary: 12 6.5% 15.1%; /* stone-700 */
+    --secondary-foreground: 60 9.1% 97.8%; /* stone-50 */
 
-    --muted: 12 6.5% 15.1%;
-    --muted-foreground: 24 5.4% 63.9%;
+    --muted: 12 6.5% 15.1%; /* stone-700 */
+    --muted-foreground: 24 5.4% 63.9%; /* stone-400 */
 
-    --accent: 12 6.5% 15.1%;
-    --accent-foreground: 60 9.1% 97.8%;
+    --accent: 43 96% 56%; /* amber-400 */
+    --accent-foreground: 20 14.3% 4.1%; /* stone-900 */
 
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 60 9.1% 97.8%;
+    --destructive-foreground: 60 9.1% 97.8%; /* stone-50 */
 
-    --border: 12 6.5% 15.1%;
-    --input: 12 6.5% 15.1%;
-    --ring: 24 5.7% 82.9%;
+    --border: 12 6.5% 15.1%; /* stone-700 */
+    --input: 12 6.5% 15.1%; /* stone-700 */
+    --ring: 43 96% 56%; /* amber-400 */
   }
 }
 
@@ -72,10 +72,41 @@
   }
   body {
     @apply bg-background text-foreground;
+    /* cursor: none; */
   }
+
+  a,
+  button,
+  [role="button"] {
+    /* cursor: none; */
+  }
+
+  .fashion-cursor {
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.7));
+  }
+}
+
+/* a,
+button,
+[role="button"] {
+  cursor: none;
+} */
+
+/* .fashion-cursor {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.7));
 }
 
 .slick-prev,
 .slick-next {
   display: none !important;
-}
+} */

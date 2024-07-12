@@ -1,5 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { SectionHeading } from "@/components/common/section-heading";
+import { SectionIntro } from "@/components/common/section-intro";
 
 const benefits = [
   {
@@ -146,29 +148,13 @@ const BlockchainBenefits: React.FC = () => {
   return (
     <section className="py-24 bg-gradient-to-b from-stone-100 to-white">
       <div className="container mx-auto px-4">
-        <motion.h2
-          className="text-4xl font-bold text-center mb-12 text-stone-800"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          Revolutionary Blockchain Benefits for Fashion
-        </motion.h2>
+        <SectionHeading title="Revolutionary Blockchain Benefits for Fashion" />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {benefits.map((benefit, index) => (
             <BenefitCard key={benefit.title} benefit={benefit} index={index} />
           ))}
         </div>
-        <motion.p
-          className="text-center mt-12 text-stone-600 max-w-2xl mx-auto"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          Join FashionForge and revolutionize your design process, protect your
-          creations, and tap into new revenue streams with blockchain
-          technology.
-        </motion.p>
+        <SectionIntro text="Join FashionForge and revolutionize your design process, protect your creations, and tap into new revenue streams with blockchain technology." />
       </div>
     </section>
   );

@@ -10,19 +10,14 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
+import { SectionHeading } from "@/components/common/section-heading";
+import { SectionIntro } from "@/components/common/section-intro";
 
 const MarketplacePreview: React.FC = () => {
   return (
     <section className="py-24 bg-stone-50">
       <div className="container mx-auto px-4">
-        <motion.h2
-          className="text-4xl font-serif text-center mb-16 text-stone-800"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          Curated Elegance
-        </motion.h2>
+        <SectionHeading title="Curated Elegance" />
 
         <div className="bg-white shadow-xl overflow-hidden rounded-lg">
           <div className="p-8 border-b border-stone-200">
@@ -173,16 +168,7 @@ const MarketplacePreview: React.FC = () => {
           </div>
         </div>
 
-        <motion.p
-          className="text-center mt-16 text-stone-600 max-w-2xl mx-auto font-serif text-lg"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          Explore our exclusive collection of blockchain-authenticated designs.
-          Each piece is a testament to creativity, authenticity, and innovation
-          in fashion.
-        </motion.p>
+        <SectionIntro text="Explore our exclusive collection of blockchain-authenticated designs. Each piece is a testament to creativity, authenticity, and innovation in fashion." />
       </div>
     </section>
   );

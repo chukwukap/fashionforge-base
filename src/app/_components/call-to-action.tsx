@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { SectionHeading } from "@/components/common/section-heading";
 
 const CTASection: React.FC = () => {
   return (
@@ -24,14 +25,7 @@ const CTASection: React.FC = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl mx-auto text-center">
-          <motion.h2
-            className="text-4xl md:text-5xl font-bold text-white mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            Ready to Revolutionize Your Fashion Design Career?
-          </motion.h2>
+          <SectionHeading title="Ready to Revolutionize Your Fashion Design Career?" />
           <motion.p
             className="text-xl text-white mb-8"
             initial={{ opacity: 0, y: 20 }}

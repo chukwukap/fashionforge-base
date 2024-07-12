@@ -1,6 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { SectionIntro } from "@/components/common/section-intro";
+import { SectionHeading } from "@/components/common/section-heading";
 
 const designers = [
   {
@@ -142,28 +144,13 @@ const DesignerSpotlight: React.FC = () => {
       </div>
 
       <div className="container mx-auto px-4 relative z-10 ">
-        <motion.h2
-          className="  text-amber-800 text-5xl font-bold text-center mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          Designer Spotlight
-        </motion.h2>
+        <SectionHeading title="Designer Spotlight" />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {designers.map((designer) => (
             <DesignerCard key={designer.id} designer={designer} />
           ))}
         </div>
-        <motion.p
-          className="text-center mt-12 text-stone-600 max-w-2xl mx-auto"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          Join these successful designers on FashionForge and turn your creative
-          vision into a thriving business.
-        </motion.p>
+        <SectionIntro text="Join these successful designers on FashionForge and turn your creative vision into a thriving business." />
       </div>
     </section>
   );

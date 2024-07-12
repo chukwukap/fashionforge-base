@@ -3,6 +3,8 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Link from "next/link";
+import { SectionHeading } from "@/components/common/section-heading";
+import { SectionIntro } from "@/components/common/section-intro";
 
 const featuredDesigns = [
   {
@@ -121,9 +123,7 @@ const FeaturedDesigns: React.FC = () => {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <h2 className="text-5xl font-bold text-center mb-12 text-stone-800">
-          Featured Designs
-        </h2>
+        <SectionHeading title="Featured Designs" />
         <div className="relative">
           <Slider ref={sliderRef} {...settings}>
             {featuredDesigns.map((design) => (
@@ -176,11 +176,7 @@ const FeaturedDesigns: React.FC = () => {
             </svg>
           </button>
         </div>
-        <p className="text-center mt-12 text-stone-600 max-w-2xl mx-auto">
-          Each design on FashionForge is securely stored and verified on the
-          blockchain, ensuring authenticity and protecting designers&apos;
-          intellectual property.
-        </p>
+        <SectionIntro text="Each design on FashionForge is securely stored and verified on the blockchain, ensuring authenticity and protecting designers' intellectual property." />
       </div>
     </section>
   );

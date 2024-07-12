@@ -1,5 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { SectionHeading } from "@/components/common/section-heading";
+import { SectionIntro } from "@/components/common/section-intro";
 
 const steps = [
   {
@@ -90,14 +92,7 @@ const HowItWorks: React.FC = () => {
   return (
     <section className="py-24 bg-gradient-to-b from-amber-50 to-white">
       <div className="container mx-auto px-4">
-        <motion.h2
-          className="text-4xl font-bold text-center mb-16 text-stone-800"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          How FashionForge Works
-        </motion.h2>
+        <SectionHeading title="How FashionForge Works" />
         <div className="flex flex-col md:flex-row justify-center items-center md:items-start space-y-8 md:space-y-0 md:space-x-4">
           {steps.map((step, index) => (
             <motion.div
@@ -120,6 +115,7 @@ const HowItWorks: React.FC = () => {
             </motion.div>
           ))}
         </div>
+        <SectionIntro text="FashionForge is the first blockchain-powered fashion platform, offering a secure and transparent design process, authenticity, and new revenue opportunities." />
       </div>
     </section>
   );

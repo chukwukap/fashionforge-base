@@ -1,5 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { SectionHeading } from "@/components/common/section-heading";
+import { SectionIntro } from "@/components/common/section-intro";
 
 const features = [
   {
@@ -164,19 +166,13 @@ const FeaturesSection: React.FC = () => {
       <div className="absolute bottom-10 right-10 w-32 h-32 border-4 border-pink-300 rounded-full opacity-50" />
 
       <div className="container mx-auto px-4 relative z-10">
-        <motion.h2
-          className="text-5xl font-extrabold text-center mb-16 text-stone-800"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          Revolutionizing Fashion with Blockchain
-        </motion.h2>
+        <SectionHeading title="Revolutionizing Fashion with Blockchain" />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {features.map((feature, index) => (
             <FeatureCard key={feature.title} feature={feature} index={index} />
           ))}
         </div>
+        <SectionIntro text="FashionForge is the first blockchain-powered fashion platform, offering a secure and transparent design process, authenticity, and new revenue opportunities." />
       </div>
     </section>
   );
