@@ -6,7 +6,7 @@ export const sampleConversations: Conversation[] = [
     with: "Aria Zhang",
     avatar: "https://i.pravatar.cc/150?img=1",
     lastMessage: "The new sketches for the Summer Breeze collection are ready!",
-    timestamp: "10:30 AM",
+    timestamp: "Fri Jul 12 2024 15:30:45 GMT+0100 (West Africa Standard Time)",
     unread: 2,
     status: "online",
   },
@@ -15,7 +15,7 @@ export const sampleConversations: Conversation[] = [
     with: "Liam Eco",
     avatar: "https://i.pravatar.cc/150?img=2",
     lastMessage: "Can we discuss the sustainable fabric options?",
-    timestamp: "Yesterday",
+    timestamp: "Fri Jul 12 2024 15:30:45 GMT+0100 (West Africa Standard Time)",
     unread: 0,
     status: "away",
   },
@@ -24,7 +24,7 @@ export const sampleConversations: Conversation[] = [
     with: "Sofia Rossi",
     avatar: "https://i.pravatar.cc/150?img=3",
     lastMessage: "I've updated the color palette for the Autumn collection.",
-    timestamp: "2 days ago",
+    timestamp: "Fri Jul 12 2024 15:30:45 GMT+0100 (West Africa Standard Time)",
     unread: 1,
     status: "offline",
   },
@@ -38,7 +38,7 @@ export const sampleMessages: Message[] = [
     avatar: "https://i.pravatar.cc/150?img=1",
     content:
       "Hi there! I've just uploaded the latest sketches for the Summer Breeze collection. Would love your thoughts!",
-    timestamp: "10:30 AM",
+    timestamp: "Fri Jul 12 2024 15:30:45 GMT+0100 (West Africa Standard Time)",
     unread: true,
     attachments: [
       {
@@ -52,6 +52,7 @@ export const sampleMessages: Message[] = [
         name: "Summer Breeze Sketch 2",
       },
     ],
+    conversationId: "1",
   },
   {
     id: "2",
@@ -59,8 +60,9 @@ export const sampleMessages: Message[] = [
     avatar: "https://i.pravatar.cc/150?img=4",
     content:
       "Thanks, Aria! These look fantastic. I especially love the floral patterns in sketch 2. Can we explore more pastel colors for this design?",
-    timestamp: "10:45 AM",
+    timestamp: "Fri Jul 12 2024 15:30:45 GMT+0100 (West Africa Standard Time)",
     unread: false,
+    conversationId: "1",
   },
   {
     id: "3",
@@ -68,8 +70,9 @@ export const sampleMessages: Message[] = [
     avatar: "https://i.pravatar.cc/150?img=1",
     content:
       "Absolutely! I'll work on a pastel variant and send it over by tomorrow Any specific shades you had in mind?",
-    timestamp: "11:00 AM",
+    timestamp: "Fri Jul 12 2024 15:30:45 GMT+0100 (West Africa Standard Time)",
     unread: true,
+    conversationId: "1",
   },
   // Add more messages as needed
 ];

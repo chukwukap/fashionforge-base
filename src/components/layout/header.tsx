@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,11 +14,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { usePrizy } from "@/lib/hooks/usePrivy";
+import Image from "next/image";
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const router = useRouter();
+  const pathName = usePathname();
+
   const { handleLogin, handleLogout, authenticated, user } = usePrizy();
 
   const navItems = [
@@ -111,10 +114,12 @@ const Header: React.FC = () => {
                       className="relative rounded-full bg-amber-100 p-1 text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500"
                     >
                       <span className="sr-only">Open user menu</span>
-                      <img
+                      <Image
                         className="h-8 w-8 rounded-full object-cover"
                         src={user?.avatar || "https://via.placeholder.com/40"}
                         alt=""
+                        width={40}
+                        height={40}
                       />
                     </Button>
                   </DropdownMenuTrigger>
@@ -194,7 +199,7 @@ const Header: React.FC = () => {
                     key={item.name}
                     href={item.href}
                     className={`block px-3 py-2 rounded-md text-base font-medium ${
-                      router.pathname === item.href
+                      pathName === item.href
                         ? "text-amber-600 bg-amber-50"
                         : "text-gray-700 hover:text-amber-600 hover:bg-amber-50"
                     }`}

@@ -18,6 +18,7 @@ export interface Project {
 
 export interface Message {
   id: string;
+  conversationId: string; // Add this line
   sender: string;
   avatar: string;
   content: string;
@@ -34,4 +35,39 @@ export interface Conversation {
   timestamp: string;
   unread: number;
   status: "online" | "offline" | "away";
+}
+
+import { BigNumber } from "ethers";
+
+export interface Variation {
+  id: string;
+  name: string;
+  image: string;
+}
+
+export interface Design {
+  id: string;
+  name: string;
+  description: string;
+  price: BigNumber;
+  likes: number;
+  views: number;
+  status: "Draft" | "Published" | "Archived";
+  designer: string;
+  createdAt: number;
+  updatedAt: number;
+  mainImage: string;
+  variations: Variation[];
+  tags: string[];
+}
+
+export interface Collection {
+  id: string;
+  name: string;
+  description: string;
+  imageUrl: string;
+  designCount: number;
+  tags: string[];
+  likes?: number;
+  views?: number;
 }
