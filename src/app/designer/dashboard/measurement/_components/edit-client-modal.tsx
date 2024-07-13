@@ -11,41 +11,66 @@ import { Label } from "@/components/ui/label";
 import { ClientMeasurement } from "@/lib/types";
 
 interface EditClientModalProps {
-  client: ClientMeasurement;
+  clientMeasurements: ClientMeasurement;
   isOpen: boolean;
   onClose: () => void;
   onUpdateClient: (data: Partial<ClientMeasurement>) => void;
 }
 
+// Mock function to fetch client data
+const fetchClientData = (clientId: string) => {
+  const mockClients = [
+    { id: "1", name: "Alice Johnson", email: "alice@example.com" },
+    { id: "2", name: "Bob Smith", email: "bob@example.com" },
+  ];
+  return mockClients.find((client) => client.id === clientId);
+};
+
 export const EditClientModal: React.FC<EditClientModalProps> = ({
-  client,
+  clientMeasurements,
   isOpen,
   onClose,
   onUpdateClient,
 }) => {
-  const [name, setName] = useState(client.name);
-  const [email, setEmail] = useState(client.email);
-  const [bust, setBust] = useState(client.measurements.bust.toString());
-  const [waist, setWaist] = useState(client.measurements.waist.toString());
-  const [hips, setHips] = useState(client.measurements.hips.toString());
+  const clientData = fetchClientData(clientMeasurements.clientId);
+  const [name, setName] = useState(clientData?.name || "");
+  const [email, setEmail] = useState(clientData?.email || "");
+  const [height, setHeight] = useState(
+    clientMeasurements.measurements.height.toString()
+  );
+  const [weight, setWeight] = useState(
+    clientMeasurements.measurements.weight.toString()
+  );
+
+  const [bust, setBust] = useState(
+    clientMeasurements.measurements.bust.toString()
+  );
+  const [waist, setWaist] = useState(
+    clientMeasurements.measurements.waist.toString()
+  );
+  const [hips, setHips] = useState(
+    clientMeasurements.measurements.hips.toString()
+  );
 
   useEffect(() => {
-    setName(client.name);
-    setEmail(client.email);
-    setBust(client.measurements.bust.toString());
-    setWaist(client.measurements.waist.toString());
-    setHips(client.measurements.hips.toString());
-  }, [client]);
+    const updatedClientData = fetchClientData(clientMeasurements.clientId);
+    setName(updatedClientData?.name || "");
+    setEmail(updatedClientData?.email || "");
+    setBust(clientMeasurements.measurements.bust.toString());
+    setWaist(clientMeasurements.measurements.waist.toString());
+    setHips(clientMeasurements.measurements.hips.toString());
+  }, [clientMeasurements]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onUpdateClient({
-      name,
-      email,
+      clientId: clientMeasurements.clientId,
       measurements: {
         bust: parseFloat(bust),
         waist: parseFloat(waist),
         hips: parseFloat(hips),
+        height: parseFloat(height),
+        weight: parseFloat(weight),
       },
     });
     onClose();
@@ -65,6 +90,7 @@ export const EditClientModal: React.FC<EditClientModalProps> = ({
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
+              disabled
             />
           </div>
           <div>
@@ -75,6 +101,7 @@ export const EditClientModal: React.FC<EditClientModalProps> = ({
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
+              disabled
             />
           </div>
           <div>

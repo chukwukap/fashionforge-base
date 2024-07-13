@@ -25,7 +25,7 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => (
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent" />
       <div className="absolute bottom-4 left-4 right-4 text-white">
         <h3 className="text-2xl font-bold mb-1">{project.title}</h3>
-        <p className="text-sm opacity-80">Designer: {project.designer}</p>
+        <p className="text-sm opacity-80">Designer: {project.designerId}</p>
         <div className="flex items-center mt-2">
           <Users className="h-4 w-4 mr-1" />
           <span className="text-xs">{project.teamSize} team members</span>
