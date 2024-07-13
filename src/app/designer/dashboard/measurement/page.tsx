@@ -1,23 +1,26 @@
-"use client";
-
 import React, { useState } from "react";
 import { MeasurementsTable } from "./_components/measurement-table";
-import { AddClientModal } from "./_components/add-client-modal";
-import { MeasurementStats } from "./_components/measurement-stats";
-import { SearchBar } from "./_components/search-bar";
-import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
+import { MeasurementHistory } from "./_components/measurement-history";
+import { MeasurementComparison } from "./_components/measurement-comparison";
+import { SizeRecommendations } from "./_components/size-recommendations";
+import { MeasurementVisualization } from "./_components/measurement-visualization";
+import { CustomMeasurements } from "./_components/custom-measurement-fields";
 import { useClientMeasurements } from "@/lib/hooks/useClientMeasurement";
+import { ClientMeasurement } from "@/lib/types";
 
 const MeasurementsPage: React.FC = () => {
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
   const { clients, addClient, updateClient, deleteClient } =
     useClientMeasurements();
+  const [selectedClient, setSelectedClient] =
+    useState<ClientMeasurement | null>(null);
 
-  const filteredClients = clients.filter((client) =>
-    client.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // You'd need to implement these functions
+  const getClientHistory = (clientId: string) => {
+    /* ... */
+  };
+  const getAverageMeasurements = () => {
+    /* ... */
+  };
 
   return (
     <div className="container mx-auto p-6 space-y-8">
@@ -25,29 +28,30 @@ const MeasurementsPage: React.FC = () => {
         Client Measurements
       </h1>
 
-      <MeasurementStats clients={clients} />
-
-      <div className="flex justify-between items-center mb-6">
-        <SearchBar value={searchTerm} onChange={setSearchTerm} />
-        <Button
-          onClick={() => setIsAddModalOpen(true)}
-          className="bg-indigo-600 hover:bg-indigo-700 text-white"
-        >
-          <Plus className="mr-2 h-4 w-4" /> Add New Client
-        </Button>
-      </div>
-
       <MeasurementsTable
-        clients={filteredClients}
+        clients={clients}
+        onAddClient={addClient}
         onUpdateClient={updateClient}
         onDeleteClient={deleteClient}
+        onSelectClient={setSelectedClient}
       />
 
-      <AddClientModal
-        isOpen={isAddModalOpen}
-        onClose={() => setIsAddModalOpen(false)}
-        onAddClient={addClient}
-      />
+      {selectedClient && (
+        <div className="grid grid-cols-2 gap-6 mt-8">
+          <MeasurementHistory history={getClientHistory(selectedClient.id)} />
+          <MeasurementComparison
+            clientMeasurements={selectedClient.measurements}
+            averageMeasurements={getAverageMeasurements()}
+          />
+          <SizeRecommendations measurements={selectedClient.measurements} />
+          <MeasurementVisualization
+            measurements={selectedClient.measurements}
+          />
+          <CustomMeasurements
+            customMeasurements={selectedClient.customMeasurements}
+          />
+        </div>
+      )}
     </div>
   );
 };
