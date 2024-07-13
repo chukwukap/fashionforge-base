@@ -39,26 +39,27 @@ export interface Conversation {
 
 import { BigNumber } from "ethers";
 
-export interface Variation {
-  id: string;
-  name: string;
-  image: string;
-}
-
 export interface Design {
   id: string;
   name: string;
   description: string;
-  price: BigNumber;
+  price: string;
   likes: number;
   views: number;
-  status: "Draft" | "Published" | "Archived";
+  status: "Minted" | "ForSale" | "Sold" | "Drafted";
   designer: string;
   createdAt: number;
   updatedAt: number;
   mainImage: string;
   variations: Variation[];
   tags: string[];
+  collectionId: string;
+}
+
+export interface Variation {
+  id: string;
+  name: string;
+  image: string;
 }
 
 export interface Collection {
@@ -68,6 +69,41 @@ export interface Collection {
   imageUrl: string;
   designCount: number;
   tags: string[];
-  likes?: number;
-  views?: number;
+  likes: number;
+  views: number;
+  createdAt: string;
+  designer: string;
+}
+
+export type FabricCategory = "Cotton" | "Silk" | "Wool" | "Synthetic" | "Linen";
+
+export interface Fabric {
+  id: string;
+  name: string;
+  description: string;
+  category: FabricCategory;
+  imageUrl: string;
+  texture: string;
+  color: string;
+  availability: string;
+  weight: number;
+  width: number;
+}
+
+export interface ColorPalette {
+  id: string;
+  name: string;
+  colors: string[];
+  tags: string[];
+}
+
+export interface ClientMeasurement {
+  id: string;
+  name: string;
+  email: string;
+  measurements: {
+    bust: number;
+    waist: number;
+    hips: number;
+  };
 }
