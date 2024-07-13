@@ -70,11 +70,16 @@ export const MeasurementsTable: React.FC<MeasurementsTableProps> = ({
           client.email.toLowerCase().includes(searchTerm.toLowerCase())
       )
       .sort((a, b) => {
-        if (a[sortColumn] < b[sortColumn])
-          return sortDirection === "asc" ? -1 : 1;
-        if (a[sortColumn] > b[sortColumn])
-          return sortDirection === "asc" ? 1 : -1;
-        return 0;
+        const aValue = a[sortColumn];
+        const bValue = b[sortColumn];
+        if (typeof aValue === "string" && typeof bValue === "string") {
+          return sortDirection === "asc"
+            ? aValue.localeCompare(bValue)
+            : bValue.localeCompare(aValue);
+        }
+        return sortDirection === "asc"
+          ? (aValue as any) - (bValue as any)
+          : (bValue as any) - (aValue as any);
       });
   }, [clients, searchTerm, sortColumn, sortDirection]);
 

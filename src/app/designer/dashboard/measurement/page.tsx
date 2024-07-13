@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import { MeasurementsTable } from "./_components/measurement-table";
 import { MeasurementHistory } from "./_components/measurement-history";
@@ -5,21 +6,51 @@ import { MeasurementComparison } from "./_components/measurement-comparison";
 import { SizeRecommendations } from "./_components/size-recommendations";
 import { MeasurementVisualization } from "./_components/measurement-visualization";
 import { CustomMeasurements } from "./_components/custom-measurement-fields";
+import { SearchBar } from "./_components/search-bar";
+import { MeasurementStats } from "./_components/measurement-stats";
 import { useClientMeasurements } from "@/lib/hooks/useClientMeasurement";
 import { ClientMeasurement } from "@/lib/types";
+import { sampleHistoryData } from "@/lib/mocks";
 
 const MeasurementsPage: React.FC = () => {
   const { clients, addClient, updateClient, deleteClient } =
     useClientMeasurements();
   const [selectedClient, setSelectedClient] =
-    useState<ClientMeasurement | null>(null);
+    useState<ClientMeasurement | null>(clients[0]);
+  const [searchTerm, setSearchTerm] = useState("");
 
-  // You'd need to implement these functions
+  // Function to get client measurement history
   const getClientHistory = (clientId: string) => {
-    /* ... */
+    const history = sampleHistoryData[clientId] || [];
+    return history.map(({ date, measurements }) => ({
+      date,
+      ...measurements,
+    }));
   };
+
+  // Function to calculate average measurements across all clients
   const getAverageMeasurements = () => {
-    /* ... */
+    // In a real application, you would calculate this based on all client data
+    // Here, we're using a simplified average based on our sample data
+    const allMeasurements = Object.values(sampleHistoryData).flatMap(
+      (history) => history.map((entry) => entry.measurements)
+    );
+
+    const totalClients = allMeasurements.length;
+    const sumMeasurements = allMeasurements.reduce(
+      (sum, measurement) => ({
+        bust: sum.bust + measurement.bust,
+        waist: sum.waist + measurement.waist,
+        hips: sum.hips + measurement.hips,
+      }),
+      { bust: 0, waist: 0, hips: 0 }
+    );
+
+    return {
+      bust: Math.round(sumMeasurements.bust / totalClients),
+      waist: Math.round(sumMeasurements.waist / totalClients),
+      hips: Math.round(sumMeasurements.hips / totalClients),
+    };
   };
 
   return (
@@ -27,6 +58,13 @@ const MeasurementsPage: React.FC = () => {
       <h1 className="text-3xl font-bold text-gray-800 mb-6">
         Client Measurements
       </h1>
+
+      <MeasurementStats clients={clients} />
+
+      <SearchBar
+        value={searchTerm}
+        onChange={(value) => setSearchTerm(value)}
+      />
 
       <MeasurementsTable
         clients={clients}
@@ -37,19 +75,32 @@ const MeasurementsPage: React.FC = () => {
       />
 
       {selectedClient && (
-        <div className="grid grid-cols-2 gap-6 mt-8">
-          <MeasurementHistory history={getClientHistory(selectedClient.id)} />
-          <MeasurementComparison
-            clientMeasurements={selectedClient.measurements}
-            averageMeasurements={getAverageMeasurements()}
-          />
-          <SizeRecommendations measurements={selectedClient.measurements} />
-          <MeasurementVisualization
-            measurements={selectedClient.measurements}
-          />
-          <CustomMeasurements
-            customMeasurements={selectedClient.customMeasurements}
-          />
+        <div className="space-y-6 mt-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <MeasurementHistory history={getClientHistory(selectedClient.id)} />
+            <MeasurementComparison
+              clientMeasurements={selectedClient.measurements}
+              averageMeasurements={getAverageMeasurements()}
+            />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <SizeRecommendations measurements={selectedClient.measurements} />
+            <MeasurementVisualization
+              measurements={{
+                ...selectedClient.measurements,
+                shoulder: 0, // Add a default value or fetch from selectedClient
+                inseam: 0, // Add a default value or fetch from selectedClient
+              }}
+            />
+            <CustomMeasurements
+              customMeasurements={selectedClient.customMeasurements || {}}
+              onUpdate={(updatedMeasurements) => {
+                updateClient(selectedClient.id, {
+                  customMeasurements: updatedMeasurements,
+                });
+              }}
+            />
+          </div>
         </div>
       )}
     </div>
