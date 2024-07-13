@@ -36,16 +36,25 @@ import { EditClientModal } from "./edit-client-modal";
 import { AddClientModal } from "./add-client-modal";
 import { motion, AnimatePresence } from "framer-motion";
 
+type MockClient = { [key: string]: { name: string; email: string } };
+
+// Mock client data
+const mockClients: MockClient = {
+  "1": { name: "John Doe", email: "john@example.com" },
+  "2": { name: "Jane Smith", email: "jane@example.com" },
+  // Add more mock clients as needed
+};
+
 interface MeasurementsTableProps {
-  clients: ClientMeasurement[];
-  onAddClient: (client: Omit<ClientMeasurement, "id">) => void;
+  clientMeasurements: ClientMeasurement[];
+  onAddClient: (clientMeasurement: Omit<ClientMeasurement, "id">) => void;
   onUpdateClient: (id: string, data: Partial<ClientMeasurement>) => void;
   onDeleteClient: (id: string) => void;
-  onSelectClient: (client: ClientMeasurement) => void;
+  onSelectClient: (clientMeasurement: ClientMeasurement) => void;
 }
 
 export const MeasurementsTable: React.FC<MeasurementsTableProps> = ({
-  clients,
+  clientMeasurements,
   onAddClient,
   onUpdateClient,
   onDeleteClient,
@@ -55,7 +64,7 @@ export const MeasurementsTable: React.FC<MeasurementsTableProps> = ({
     null
   );
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const [sortColumn, setSortColumn] = useState<keyof ClientMeasurement>("name");
+  const [sortColumn, setSortColumn] = useState<"name" | "email">("name");
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
@@ -63,25 +72,25 @@ export const MeasurementsTable: React.FC<MeasurementsTableProps> = ({
   const itemsPerPage = 10;
 
   const filteredAndSortedClients = useMemo(() => {
-    return [...clients]
-      .filter(
-        (client) =>
-          client.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          client.email.toLowerCase().includes(searchTerm.toLowerCase())
-      )
+    return [...clientMeasurements]
+      .filter((measurement) => {
+        const client = mockClients[measurement.clientId];
+        return (
+          client &&
+          (client.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            client.email.toLowerCase().includes(searchTerm.toLowerCase()))
+        );
+      })
       .sort((a, b) => {
-        const aValue = a[sortColumn];
-        const bValue = b[sortColumn];
-        if (typeof aValue === "string" && typeof bValue === "string") {
-          return sortDirection === "asc"
-            ? aValue.localeCompare(bValue)
-            : bValue.localeCompare(aValue);
-        }
+        const aClient = mockClients[a.clientId];
+        const bClient = mockClients[b.clientId];
+        const aValue = aClient[sortColumn];
+        const bValue = bClient[sortColumn];
         return sortDirection === "asc"
-          ? (aValue as any) - (bValue as any)
-          : (bValue as any) - (aValue as any);
+          ? aValue.localeCompare(bValue)
+          : bValue.localeCompare(aValue);
       });
-  }, [clients, searchTerm, sortColumn, sortDirection]);
+  }, [clientMeasurements, searchTerm, sortColumn, sortDirection]);
 
   const paginatedClients = filteredAndSortedClients.slice(
     (currentPage - 1) * itemsPerPage,
@@ -90,7 +99,7 @@ export const MeasurementsTable: React.FC<MeasurementsTableProps> = ({
 
   const totalPages = Math.ceil(filteredAndSortedClients.length / itemsPerPage);
 
-  const handleSort = (column: keyof ClientMeasurement) => {
+  const handleSort = (column: "name" | "email") => {
     if (column === sortColumn) {
       setSortDirection(sortDirection === "asc" ? "desc" : "asc");
     } else {
@@ -99,7 +108,7 @@ export const MeasurementsTable: React.FC<MeasurementsTableProps> = ({
     }
   };
 
-  const SortIcon = ({ column }: { column: keyof ClientMeasurement }) => {
+  const SortIcon = ({ column }: { column: "name" | "email" }) => {
     if (column !== sortColumn) return null;
     return sortDirection === "asc" ? (
       <ChevronUp className="ml-2 h-4 w-4" />
@@ -136,7 +145,9 @@ export const MeasurementsTable: React.FC<MeasurementsTableProps> = ({
 
   const handleSelectAll = (checked: boolean) => {
     if (checked) {
-      setSelectedClients(paginatedClients.map((client) => client.id));
+      setSelectedClients(
+        paginatedClients.map((clientMeasurement) => clientMeasurement.id)
+      );
     } else {
       setSelectedClients([]);
     }
@@ -176,20 +187,21 @@ export const MeasurementsTable: React.FC<MeasurementsTableProps> = ({
     const headers = ["Name", "Email", "Bust", "Waist", "Hips", "Size"];
     const csvContent = [
       headers.join(","),
-      ...filteredAndSortedClients.map((client) =>
-        [
+      ...filteredAndSortedClients.map((clientMeasurement) => {
+        const client = mockClients[clientMeasurement.clientId];
+        return [
           client.name,
           client.email,
-          client.measurements.bust,
-          client.measurements.waist,
-          client.measurements.hips,
+          clientMeasurement.measurements.bust,
+          clientMeasurement.measurements.waist,
+          clientMeasurement.measurements.hips,
           getSizeCategory(
-            client.measurements.bust,
-            client.measurements.waist,
-            client.measurements.hips
+            clientMeasurement.measurements.bust,
+            clientMeasurement.measurements.waist,
+            clientMeasurement.measurements.hips
           ),
-        ].join(",")
-      ),
+        ].join(",");
+      }),
     ].join("\n");
 
     const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
@@ -211,27 +223,23 @@ export const MeasurementsTable: React.FC<MeasurementsTableProps> = ({
   };
 
   const handleBulkExport = () => {
-    const selectedClientData = filteredAndSortedClients.filter((client) =>
-      selectedClients.includes(client.id)
+    const selectedClientData = filteredAndSortedClients.filter(
+      (clientMeasurement) => selectedClients.includes(clientMeasurement.id)
     );
 
     const headers = ["Name", "Email", "Bust", "Waist", "Hips", "Size"];
+
     const csvContent = [
       headers.join(","),
-      ...selectedClientData.map((client) =>
-        [
+      ...selectedClientData.map((clientMeasurement) => {
+        const client = mockClients[clientMeasurement.clientId];
+        return [
           client.name,
           client.email,
-          client.measurements.bust,
-          client.measurements.waist,
-          client.measurements.hips,
-          getSizeCategory(
-            client.measurements.bust,
-            client.measurements.waist,
-            client.measurements.hips
-          ),
-        ].join(",")
-      ),
+          clientMeasurement.measurements.bust,
+          // ... rest of the code ...
+        ].join(",");
+      }),
     ].join("\n");
 
     const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
@@ -246,6 +254,7 @@ export const MeasurementsTable: React.FC<MeasurementsTableProps> = ({
       document.body.removeChild(link);
     }
   };
+
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
@@ -335,88 +344,98 @@ export const MeasurementsTable: React.FC<MeasurementsTableProps> = ({
           </TableHeader>
           <TableBody>
             <AnimatePresence>
-              {paginatedClients.map((client) => (
-                <motion.tr
-                  key={client.id}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <TableCell>
-                    <Checkbox
-                      checked={selectedClients.includes(client.id)}
-                      onCheckedChange={(checked) =>
-                        checked
-                          ? setSelectedClients([...selectedClients, client.id])
-                          : setSelectedClients(
-                              selectedClients.filter((id) => id !== client.id)
-                            )
-                      }
-                    />
-                  </TableCell>
-                  <TableCell className="font-medium">{client.name}</TableCell>
-                  <TableCell>{client.email}</TableCell>
-                  <TableCell className="text-right">
-                    {client.measurements.bust} cm
-                  </TableCell>
-                  <TableCell className="text-right">
-                    {client.measurements.waist} cm
-                  </TableCell>
-                  <TableCell className="text-right">
-                    {client.measurements.hips} cm
-                  </TableCell>
-                  <TableCell className="text-center">
-                    <Badge
-                      className={`${getBadgeColor(
-                        getSizeCategory(
-                          client.measurements.bust,
-                          client.measurements.waist,
-                          client.measurements.hips
-                        )
-                      )}`}
-                    >
-                      {getSizeCategory(
-                        client.measurements.bust,
-                        client.measurements.waist,
-                        client.measurements.hips
-                      )}
-                    </Badge>
-                  </TableCell>
-                  <TableCell className="text-right">
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" className="h-8 w-8 p-0">
-                          <span className="sr-only">Open menu</span>
-                          <MoreHorizontal className="h-4 w-4" />
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem
-                          onClick={() => onSelectClient(client)}
-                        >
-                          View Details
-                        </DropdownMenuItem>
-                        <DropdownMenuItem
-                          onClick={() => setEditingClient(client)}
-                        >
-                          <Edit2 className="mr-2 h-4 w-4" /> Edit
-                        </DropdownMenuItem>
-                        <DropdownMenuItem
-                          onClick={() => onDeleteClient(client.id)}
-                        >
-                          <Trash2 className="mr-2 h-4 w-4" /> Delete
-                        </DropdownMenuItem>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem onClick={() => handleExport()}>
-                          <FileDown className="mr-2 h-4 w-4" /> Export
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </TableCell>
-                </motion.tr>
-              ))}
+              {paginatedClients.map((measurement) => {
+                const client = mockClients[measurement.clientId];
+                return (
+                  <motion.tr
+                    key={measurement.id}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <TableCell>
+                      <Checkbox
+                        checked={selectedClients.includes(measurement.id)}
+                        onCheckedChange={(checked) =>
+                          checked
+                            ? setSelectedClients([
+                                ...selectedClients,
+                                measurement.id,
+                              ])
+                            : setSelectedClients(
+                                selectedClients.filter(
+                                  (id) => id !== measurement.id
+                                )
+                              )
+                        }
+                      />
+                    </TableCell>
+                    <TableCell className="font-medium">
+                      {client?.name}
+                    </TableCell>
+                    <TableCell>{client?.email}</TableCell>
+                    <TableCell className="text-right">
+                      {measurement.measurements.bust} cm
+                    </TableCell>
+                    <TableCell className="text-right">
+                      {measurement.measurements.waist} cm
+                    </TableCell>
+                    <TableCell className="text-right">
+                      {measurement.measurements.hips} cm
+                    </TableCell>
+                    <TableCell className="text-center">
+                      <Badge
+                        className={`${getBadgeColor(
+                          getSizeCategory(
+                            measurement.measurements.bust,
+                            measurement.measurements.waist,
+                            measurement.measurements.hips
+                          )
+                        )}`}
+                      >
+                        {getSizeCategory(
+                          measurement.measurements.bust,
+                          measurement.measurements.waist,
+                          measurement.measurements.hips
+                        )}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="text-right">
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button variant="ghost" className="h-8 w-8 p-0">
+                            <span className="sr-only">Open menu</span>
+                            <MoreHorizontal className="h-4 w-4" />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                          <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                          <DropdownMenuItem
+                            onClick={() => onSelectClient(measurement)}
+                          >
+                            View Details
+                          </DropdownMenuItem>
+                          <DropdownMenuItem
+                            onClick={() => setEditingClient(measurement)}
+                          >
+                            <Edit2 className="mr-2 h-4 w-4" /> Edit
+                          </DropdownMenuItem>
+                          <DropdownMenuItem
+                            onClick={() => onDeleteClient(measurement.id)}
+                          >
+                            <Trash2 className="mr-2 h-4 w-4" /> Delete
+                          </DropdownMenuItem>
+                          <DropdownMenuSeparator />
+                          <DropdownMenuItem onClick={() => handleExport()}>
+                            <FileDown className="mr-2 h-4 w-4" /> Export
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </TableCell>
+                  </motion.tr>
+                );
+              })}
             </AnimatePresence>
           </TableBody>
         </Table>
@@ -424,7 +443,7 @@ export const MeasurementsTable: React.FC<MeasurementsTableProps> = ({
       <div className="flex items-center justify-between">
         <div className="text-sm text-gray-500">
           Showing {paginatedClients.length} of {filteredAndSortedClients.length}{" "}
-          clients
+          measurements
         </div>
         <div className="flex items-center space-x-2">
           <Button
@@ -454,7 +473,7 @@ export const MeasurementsTable: React.FC<MeasurementsTableProps> = ({
       </div>
       {editingClient && (
         <EditClientModal
-          client={editingClient}
+          clientMeasurements={editingClient}
           isOpen={!!editingClient}
           onClose={() => setEditingClient(null)}
           onUpdateClient={(data) => {
@@ -466,8 +485,8 @@ export const MeasurementsTable: React.FC<MeasurementsTableProps> = ({
       <AddClientModal
         isOpen={isAddModalOpen}
         onClose={() => setIsAddModalOpen(false)}
-        onAddClient={(client) => {
-          onAddClient(client);
+        onAddClient={(clientMeasurement) => {
+          onAddClient(clientMeasurement);
           setIsAddModalOpen(false);
         }}
       />
