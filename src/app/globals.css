@@ -4,68 +4,67 @@
 
 @layer base {
   :root {
-    --background: 60 9% 98%; /* stone-50 */
-    --foreground: 20 14.3% 4.1%; /* stone-900 */
+    --background: 240 100% 99%; /* Blockchain White */
+    --foreground: 220 100% 31%; /* Quantum Blue */
 
     --card: 0 0% 100%;
-    --card-foreground: 20 14.3% 4.1%; /* stone-900 */
+    --card-foreground: 220 100% 31%; /* Quantum Blue */
 
     --popover: 0 0% 100%;
-    --popover-foreground: 20 14.3% 4.1%; /* stone-900 */
+    --popover-foreground: 220 100% 31%; /* Quantum Blue */
 
-    --primary: 43 96% 56%; /* amber-400 */
-    --primary-foreground: 20 14.3% 4.1%; /* stone-900 */
+    --primary: 220 100% 31%; /* Quantum Blue */
+    --primary-foreground: 240 100% 99%; /* Blockchain White */
 
-    --secondary: 60 4.8% 95.9%; /* stone-100 */
-    --secondary-foreground: 24 9.8% 10%; /* stone-800 */
+    --secondary: 348 85% 44%; /* Couture Crimson */
+    --secondary-foreground: 240 100% 99%; /* Blockchain White */
 
-    --muted: 60 4.8% 95.9%; /* stone-100 */
-    --muted-foreground: 25 5.3% 44.7%; /* stone-500 */
+    --muted: 0 0% 50%; /* Neutral Gray */
+    --muted-foreground: 220 100% 31%; /* Quantum Blue */
 
-    --accent: 43 96% 56%; /* amber-400 */
-    --accent-foreground: 20 14.3% 4.1%; /* stone-900 */
+    --accent: 45 100% 50%; /* Digital Gold */
+    --accent-foreground: 220 100% 31%; /* Quantum Blue */
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 60 9.1% 97.8%; /* stone-50 */
+    --destructive: 348 85% 44%; /* Couture Crimson */
+    --destructive-foreground: 240 100% 99%; /* Blockchain White */
 
-    --border: 20 5.9% 90%; /* stone-200 */
-    --input: 20 5.9% 90%; /* stone-200 */
-    --ring: 43 96% 56%; /* amber-400 */
+    --border: 0 0% 50%; /* Neutral Gray */
+    --input: 0 0% 50%; /* Neutral Gray */
+    --ring: 45 100% 50%; /* Digital Gold */
 
     --radius: 0.5rem;
   }
 
   .dark {
-    --background: 20 14.3% 4.1%; /* stone-900 */
-    --foreground: 60 9.1% 97.8%; /* stone-50 */
+    --background: 220 100% 31%; /* Quantum Blue */
+    --foreground: 240 100% 99%; /* Blockchain White */
 
-    --card: 24 9.8% 10%; /* stone-800 */
-    --card-foreground: 60 9.1% 97.8%; /* stone-50 */
+    --card: 220 100% 25%; /* Darker Quantum Blue */
+    --card-foreground: 240 100% 99%; /* Blockchain White */
 
-    --popover: 24 9.8% 10%; /* stone-800 */
-    --popover-foreground: 60 9.1% 97.8%; /* stone-50 */
+    --popover: 220 100% 25%; /* Darker Quantum Blue */
+    --popover-foreground: 240 100% 99%; /* Blockchain White */
 
-    --primary: 43 96% 56%; /* amber-400 */
-    --primary-foreground: 20 14.3% 4.1%; /* stone-900 */
+    --primary: 45 100% 50%; /* Digital Gold */
+    --primary-foreground: 220 100% 31%; /* Quantum Blue */
 
-    --secondary: 12 6.5% 15.1%; /* stone-700 */
-    --secondary-foreground: 60 9.1% 97.8%; /* stone-50 */
+    --secondary: 348 85% 44%; /* Couture Crimson */
+    --secondary-foreground: 240 100% 99%; /* Blockchain White */
 
-    --muted: 12 6.5% 15.1%; /* stone-700 */
-    --muted-foreground: 24 5.4% 63.9%; /* stone-400 */
+    --muted: 0 0% 50%; /* Neutral Gray */
+    --muted-foreground: 240 100% 99%; /* Blockchain White */
 
-    --accent: 43 96% 56%; /* amber-400 */
-    --accent-foreground: 20 14.3% 4.1%; /* stone-900 */
+    --accent: 157 100% 33%; /* Eco Green */
+    --accent-foreground: 240 100% 99%; /* Blockchain White */
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 60 9.1% 97.8%; /* stone-50 */
+    --destructive: 348 85% 44%; /* Couture Crimson */
+    --destructive-foreground: 240 100% 99%; /* Blockchain White */
 
-    --border: 12 6.5% 15.1%; /* stone-700 */
-    --input: 12 6.5% 15.1%; /* stone-700 */
-    --ring: 43 96% 56%; /* amber-400 */
+    --border: 0 0% 50%; /* Neutral Gray */
+    --input: 0 0% 50%; /* Neutral Gray */
+    --ring: 45 100% 50%; /* Digital Gold */
   }
 }
-
 @layer base {
   * {
     @apply border-border;
