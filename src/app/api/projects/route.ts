@@ -6,7 +6,7 @@ const contractABI = [
   /* Your contract ABI */
 ] as const;
 
-const contractAddress = process.env.CONTRACT_ADDRESS;
+const contractAddress = "0x4200000000000000000000000000000000000069";
 
 if (!contractAddress) {
   throw new Error("CONTRACT_ADDRESS is not defined in environment variables");
@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const provider = new ethers.providers.JsonRpcProvider(rpcUrl);
+    const provider = new ethers.JsonRpcProvider(rpcUrl);
     const adminWallet = new ethers.Wallet(adminPrivateKey, provider);
     const contract = new ethers.Contract(
       contractAddress!,
@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
       adminWallet
     );
 
-    const roleBytes32 = ethers.utils.id("DESIGNER_ROLE");
+    const roleBytes32 = ethers.id("DESIGNER_ROLE");
     const tx = await contract.assignRole(address, roleBytes32);
     await tx.wait();
 

@@ -1,4 +1,4 @@
-import { BigNumber } from "ethers";
+import ethers from "ethers";
 
 // User and Authentication
 export type UserRole = "CLIENT" | "DESIGNER" | "ADMIN";
@@ -110,7 +110,7 @@ export interface Project {
   trend: "up" | "down" | "stable";
   teamSize: number;
   commentsCount: number;
-  budget: BigNumber;
+  budget: ethers.BigNumberish;
   piecesCount: number;
   designs: string[];
   contractAddress: string;
@@ -120,7 +120,7 @@ export interface Design {
   id: string;
   name: string;
   description: string;
-  price: BigNumber;
+  price: ethers.BigNumberish;
   likes: number;
   views: number;
   status: DesignStatus;
@@ -218,7 +218,7 @@ export type TransactionStatus = "Pending" | "Completed" | "Failed";
 export interface Transaction {
   id: string;
   projectId: string;
-  amount: BigNumber;
+  amount: ethers.BigNumberish;
   tokenAddress: string;
   status: TransactionStatus;
   fromAddress: string;

@@ -7,7 +7,7 @@ import ProjectCard from "./_components/project-card";
 import ProjectStats from "./_components/project-stats";
 import { Project } from "@/lib/types/";
 import Image from "next/image";
-import ethers from "ethers";
+import { ethers } from "ethers";
 
 const projects: Project[] = [
   {
@@ -26,7 +26,7 @@ const projects: Project[] = [
     commentsCount: 23,
     description:
       "A vibrant and airy collection inspired by coastal summers. Featuring lightweight fabrics, pastel hues, and breezy silhouettes perfect for beachside lounging and seaside soirées.",
-    budget: ethers.BigNumber.from(50000),
+    budget: BigInt(50000),
     startDate: "2023-09-01",
     clientId: "client123",
     designs: [],
@@ -48,7 +48,7 @@ const projects: Project[] = [
     commentsCount: 17,
     description:
       "A sleek and modern collection designed for the urban professional. Featuring versatile pieces that transition seamlessly from office to evening events.",
-    budget: ethers.BigNumber.from(75000),
+    budget: BigInt(75000),
     startDate: "2023-10-15",
     clientId: "client456",
     designs: [],
@@ -70,7 +70,7 @@ const projects: Project[] = [
     commentsCount: 31,
     description:
       "An innovative activewear collection made from sustainable materials. Designed for high performance while minimizing environmental impact.",
-    budget: ethers.BigNumber.from(100000),
+    budget: BigInt(100000),
     startDate: "2023-08-01",
     clientId: "client789",
     designs: [],

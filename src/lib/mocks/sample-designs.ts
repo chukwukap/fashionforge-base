@@ -7,7 +7,7 @@ export const sampleDesigns: Design[] = [
     name: "Ethereal Evening Gown",
     description:
       "A stunning evening gown with ethereal qualities, perfect for red carpet events.",
-    price: ethers.BigNumber.from("1"),
+    price: ethers.toBigInt("1"),
     likes: 1200,
     views: 5600,
     status: "Minted",
@@ -39,7 +39,7 @@ export const sampleDesigns: Design[] = [
     id: "0x2345678901234567890123456789012345678901",
     name: "Urban Chic Jacket",
     description: "A versatile jacket that embodies urban style and comfort.",
-    price: ethers.BigNumber.from("8"),
+    price: ethers.toBigInt("8"),
     likes: 980,
     views: 4200,
     status: "ForSale",

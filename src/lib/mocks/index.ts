@@ -65,40 +65,58 @@ export const samplePalettes: ColorPalette[] = [
   },
 ];
 
-export const sampleHistoryData: Record<string, ClientMeasurement[]> = {
+type HistoryEntry = {
+  date: string;
+  measurements: ClientMeasurement;
+};
+export const sampleHistoryData: Record<string, HistoryEntry[]> = {
   client1: [
     {
-      id: "1",
-      clientId: "client1",
-      measurements: { bust: 88, waist: 70, hips: 94, height: 165, weight: 60 },
+      date: "2023-01-01",
+      measurements: {
+        id: "1",
+        clientId: "client1",
+        measurements: {
+          bust: 88,
+          waist: 70,
+          hips: 94,
+          height: 165,
+          weight: 60,
+        },
+      },
     },
     {
-      id: "2",
-      clientId: "client1",
-      measurements: { bust: 89, waist: 71, hips: 95, height: 165, weight: 61 },
+      date: "2023-02-01",
+      measurements: {
+        id: "2",
+        clientId: "client1",
+        measurements: {
+          bust: 89,
+          waist: 71,
+          hips: 95,
+          height: 165,
+          weight: 61,
+        },
+      },
     },
-    {
-      id: "3",
-      clientId: "client1",
-      measurements: { bust: 90, waist: 72, hips: 96, height: 165, weight: 62 },
-    },
+    // ... (similar structure for the third entry)
   ],
   client2: [
     {
-      id: "4",
-      clientId: "client2",
-      measurements: { bust: 92, waist: 74, hips: 98, height: 170, weight: 65 },
+      date: "2023-01-15",
+      measurements: {
+        id: "4",
+        clientId: "client2",
+        measurements: {
+          bust: 92,
+          waist: 74,
+          hips: 98,
+          height: 170,
+          weight: 65,
+        },
+      },
     },
-    {
-      id: "5",
-      clientId: "client2",
-      measurements: { bust: 91, waist: 73, hips: 97, height: 170, weight: 64 },
-    },
-    {
-      id: "6",
-      clientId: "client2",
-      measurements: { bust: 90, waist: 72, hips: 96, height: 170, weight: 63 },
-    },
+    // ... (similar structure for the other two entries)
   ],
   // Add more client histories as needed
 };

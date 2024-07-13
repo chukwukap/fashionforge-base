@@ -1,8 +1,8 @@
 "use client";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { http } from "wagmi";
 import { mainnet, sepolia, coreDao } from "viem/chains";
+import { http } from "viem";
 
 import type { PrivyClientConfig } from "@privy-io/react-auth";
 import { PrivyProvider } from "@privy-io/react-auth";
@@ -47,6 +47,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
     >
       <SupabaseProvider>
         <QueryClientProvider client={queryClient}>
+          {/* @ts-ignore */}
           <WagmiProvider config={wagmiConfig}>
             <TooltipProvider>{children}</TooltipProvider>
           </WagmiProvider>

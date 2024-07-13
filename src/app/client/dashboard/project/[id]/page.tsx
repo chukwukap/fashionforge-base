@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
-import ethers from "ethers";
+import { ethers } from "ethers";
 
 import ProjectTimeline from "./_components/project-timeline";
 import TeamMemberList from "./_components/team-member-list";
@@ -32,7 +32,7 @@ const projectDetails: Project = {
   commentsCount: 23,
   description:
     "A vibrant and airy collection inspired by coastal summers. Featuring lightweight fabrics, pastel hues, and breezy silhouettes perfect for beachside lounging and seaside soirées.",
-  budget: ethers.BigNumber.from(50000),
+  budget: BigInt(50000),
   startDate: "2023-09-01",
   clientId: "client123",
   designs: [],
@@ -108,8 +108,8 @@ const ProjectDetailsPage: React.FC = () => {
         </Card>
 
         <ProjectStats
-          budget={projectDetails.budget?.toNumber() || 0}
-          expenses={projectDetails.budget?.toNumber() || 0}
+          budget={Number(projectDetails.budget)}
+          expenses={Number(projectDetails.budget)}
           completedPieces={projectDetails.piecesCount}
           totalDays={projectDetails.piecesCount}
           totalPieces={projectDetails.piecesCount}

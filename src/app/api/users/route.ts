@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
       throw new Error("Missing environment variables");
     }
 
-    const provider = new ethers.providers.JsonRpcProvider(process.env.RPC_URL);
+    const provider = new ethers.JsonRpcProvider(process.env.RPC_URL);
     const adminWallet = new ethers.Wallet(
       process.env.ADMIN_PRIVATE_KEY,
       provider
@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
 
     let roleBytes32: string;
     if (userType === "CLIENT") {
-      roleBytes32 = ethers.utils.id("CLIENT_ROLE");
+      roleBytes32 = ethers.id("CLIENT_ROLE");
       // Assign CLIENT role immediately
       const tx = await contract.assignRole(address, roleBytes32);
       await tx.wait();

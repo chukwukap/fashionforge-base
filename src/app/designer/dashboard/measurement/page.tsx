@@ -12,6 +12,10 @@ import { useClientMeasurements } from "@/lib/hooks/useClientMeasurement";
 import { ClientMeasurement } from "@/lib/types";
 import { sampleHistoryData } from "@/lib/mocks";
 
+type HistoryEntry = {
+  date: string;
+  measurements: ClientMeasurement;
+};
 const MeasurementsPage: React.FC = () => {
   const { clients, addClient, updateClient, deleteClient } =
     useClientMeasurements();
@@ -20,14 +24,17 @@ const MeasurementsPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   // Function to get client measurement history
-  const getClientHistory = (clientId: string) => {
-    const history = sampleHistoryData[clientId] || [];
+  const getClientHistory = (
+    clientId: string
+  ): { date: string; bust: number; waist: number; hips: number }[] => {
+    const history: HistoryEntry[] = sampleHistoryData[clientId] || [];
     return history.map(({ date, measurements }) => ({
       date,
-      ...measurements,
+      bust: measurements.measurements.bust,
+      waist: measurements.measurements.waist,
+      hips: measurements.measurements.hips,
     }));
   };
-
   // Function to calculate average measurements across all clients
   const getAverageMeasurements = () => {
     // In a real application, you would calculate this based on all client data
@@ -39,9 +46,9 @@ const MeasurementsPage: React.FC = () => {
     const totalClients = allMeasurements.length;
     const sumMeasurements = allMeasurements.reduce(
       (sum, measurement) => ({
-        bust: sum.bust + measurement.bust,
-        waist: sum.waist + measurement.waist,
-        hips: sum.hips + measurement.hips,
+        bust: sum.bust + measurement.measurements.bust,
+        waist: sum.waist + measurement.measurements.waist,
+        hips: sum.hips + measurement.measurements.hips,
       }),
       { bust: 0, waist: 0, hips: 0 }
     );
@@ -67,7 +74,7 @@ const MeasurementsPage: React.FC = () => {
       />
 
       <MeasurementsTable
-        clients={clients}
+        clientMeasurements={clients}
         onAddClient={addClient}
         onUpdateClient={updateClient}
         onDeleteClient={deleteClient}

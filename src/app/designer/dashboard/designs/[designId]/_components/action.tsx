@@ -107,7 +107,7 @@ export function DesignActions({ design }: DesignActionsProps) {
                 </h4>
                 <p className="text-sm text-gray-600 mb-4">
                   You are about to purchase &quot;{design.name}&quot; for{" "}
-                  {ethers.utils.formatEther(design.price)} ETH.
+                  {ethers.formatEther(design.price)} ETH.
                 </p>
                 <Button
                   className="w-full mb-2 bg-indigo-600 hover:bg-indigo-700 transition-colors duration-300"

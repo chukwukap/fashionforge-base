@@ -28,7 +28,7 @@ export function DesignDetails({
             Current Price
           </span>
           <span className="text-4xl font-bold text-indigo-600">
-            {ethers.utils.formatEther(design.price)} ETH
+            {ethers.formatEther(design.price)} ETH
           </span>
         </div>
         <div className="flex items-center space-x-4">

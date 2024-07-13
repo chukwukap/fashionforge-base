@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Design } from "@/lib/types";
-import { BigNumber } from "ethers";
+import ethers from "ethers";
 
 interface AddDesignModalProps {
   isOpen: boolean;
@@ -29,7 +29,7 @@ export const AddDesignModal: React.FC<AddDesignModalProps> = ({
       mainImage: imageUrl,
       collectionId,
       status: "Drafted",
-      price: BigNumber.from(price),
+      price: ethers.toBigInt(price),
       likes: 0,
       views: 0,
       createdAt: new Date().getTime(),
