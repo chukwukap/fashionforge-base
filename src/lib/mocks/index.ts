@@ -1,4 +1,4 @@
-import { ClientMeasurement, ColorPalette } from "@/lib/types";
+import { ClientMeasurement, ClientUser, ColorPalette } from "@/lib/types";
 import { Fabric } from "@/lib/types";
 
 export const sampleFabrics: Fabric[] = [
@@ -65,19 +65,40 @@ export const samplePalettes: ColorPalette[] = [
   },
 ];
 
-export const sampleHistoryData: Record<
-  string,
-  Array<{ date: string; measurements: ClientMeasurement["measurements"] }>
-> = {
+export const sampleHistoryData: Record<string, ClientMeasurement[]> = {
   client1: [
-    { date: "2023-01-01", measurements: { bust: 88, waist: 70, hips: 94 } },
-    { date: "2023-04-01", measurements: { bust: 89, waist: 71, hips: 95 } },
-    { date: "2023-07-01", measurements: { bust: 90, waist: 72, hips: 96 } },
+    {
+      id: "1",
+      clientId: "client1",
+      measurements: { bust: 88, waist: 70, hips: 94, height: 165, weight: 60 },
+    },
+    {
+      id: "2",
+      clientId: "client1",
+      measurements: { bust: 89, waist: 71, hips: 95, height: 165, weight: 61 },
+    },
+    {
+      id: "3",
+      clientId: "client1",
+      measurements: { bust: 90, waist: 72, hips: 96, height: 165, weight: 62 },
+    },
   ],
   client2: [
-    { date: "2023-02-01", measurements: { bust: 92, waist: 74, hips: 98 } },
-    { date: "2023-05-01", measurements: { bust: 91, waist: 73, hips: 97 } },
-    { date: "2023-08-01", measurements: { bust: 90, waist: 72, hips: 96 } },
+    {
+      id: "4",
+      clientId: "client2",
+      measurements: { bust: 92, waist: 74, hips: 98, height: 170, weight: 65 },
+    },
+    {
+      id: "5",
+      clientId: "client2",
+      measurements: { bust: 91, waist: 73, hips: 97, height: 170, weight: 64 },
+    },
+    {
+      id: "6",
+      clientId: "client2",
+      measurements: { bust: 90, waist: 72, hips: 96, height: 170, weight: 63 },
+    },
   ],
   // Add more client histories as needed
 };

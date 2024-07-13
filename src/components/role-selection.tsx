@@ -1,6 +1,6 @@
 // components/RoleSelection.tsx
 import React from "react";
-import { useUser } from "@/hooks/useUser";
+import { useUser } from "@/lib/hooks/useUser";
 import { UserRole } from "@/lib/types";
 
 export default function RoleSelection() {
@@ -19,13 +19,13 @@ export default function RoleSelection() {
           onClick={() => handleRoleSelection("CLIENT")}
           className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-300"
         >
-          I'm a Client
+          I&apos;m a Client
         </button>
         <button
           onClick={() => handleRoleSelection("DESIGNER")}
           className="px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300"
         >
-          I'm a Designer
+          I&apos;m a Designer
         </button>
       </div>
     </div>

@@ -1,7 +1,7 @@
 "use client";
-import { usePrizy } from "@/lib/hooks/usePrivy";
-import { usePrivy } from "@privy-io/react-auth";
-import { useRouter } from "next/router";
+import { useUser } from "@/lib/hooks/useUser";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const ProtectedRoute = (
   WrappedComponent: React.ComponentType,
@@ -9,19 +9,24 @@ const ProtectedRoute = (
 ) => {
   const ProtectedComponent = (props: any) => {
     const router = useRouter();
-    const { user, ready, authenticated } = usePrivy();
+    const { user, loading } = useUser();
 
-    if (!ready) return <div>Loading...</div>;
+    useEffect(() => {
+      if (!loading && !user) {
+        router.replace("/login");
+      } else if (user && allowedRoles && !allowedRoles.includes(user.role)) {
+        router.replace("/unauthorized");
+      }
+    }, [user, loading, router]);
 
-    if (!(ready && authenticated) || !user) {
-      router.replace("/login");
-      return null;
+    if (loading) return <div>Loading...</div>;
+
+    if (!user) return null; // Router will redirect, no need to render anything
+
+    if (allowedRoles && !allowedRoles.includes(user.role)) {
+      return null; // Router will redirect, no need to render anything
     }
 
-    if (allowedRoles && (!user?.role || !allowedRoles.includes(user.role))) {
-      router.replace("/unauthorized");
-      return null;
-    }
     return <WrappedComponent {...props} />;
   };
 

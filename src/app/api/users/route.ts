@@ -1,15 +1,23 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { ethers } from "ethers";
 
 const contractABI = [
   /* Your contract ABI */
-];
+] as const;
 const contractAddress = process.env.CONTRACT_ADDRESS;
 
 export async function POST(request: NextRequest) {
   const { address, userType } = await request.json();
 
   try {
+    if (
+      !process.env.RPC_URL ||
+      !process.env.ADMIN_PRIVATE_KEY ||
+      !contractAddress
+    ) {
+      throw new Error("Missing environment variables");
+    }
+
     const provider = new ethers.providers.JsonRpcProvider(process.env.RPC_URL);
     const adminWallet = new ethers.Wallet(
       process.env.ADMIN_PRIVATE_KEY,
@@ -21,7 +29,7 @@ export async function POST(request: NextRequest) {
       adminWallet
     );
 
-    let roleBytes32;
+    let roleBytes32: string;
     if (userType === "CLIENT") {
       roleBytes32 = ethers.utils.id("CLIENT_ROLE");
       // Assign CLIENT role immediately
@@ -50,11 +58,11 @@ export async function POST(request: NextRequest) {
   }
 }
 
-async function storeDesignerApplication(address) {
+async function storeDesignerApplication(address: `0x${string}`) {
   // Implement this function to store the designer application for later verification
   // This could be a database entry, a notification to admins, etc.
 }
 
-async function updateUserTypeInDatabase(address, userType) {
+async function updateUserTypeInDatabase(address: `0x${string}`, userType: any) {
   // Implement this function to update the user type in your database
 }

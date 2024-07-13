@@ -8,14 +8,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
-import {
-  Calendar,
-  MessageSquare,
-  TrendingUp,
-  Users,
-  Scissors,
-  Clock,
-} from "lucide-react";
+import ethers from "ethers";
+
 import ProjectTimeline from "./_components/project-timeline";
 import TeamMemberList from "./_components/team-member-list";
 import ProjectStats from "./_components/project-stats";
@@ -25,7 +19,7 @@ import { Project } from "@/lib/types";
 const projectDetails: Project = {
   id: "1",
   title: "Summer Breeze Collection",
-  designer: "Aria Zhang",
+  designerId: "Aria Zhang",
   status: "In Progress",
   piecesCount: 5,
   progress: 65,
@@ -38,8 +32,11 @@ const projectDetails: Project = {
   commentsCount: 23,
   description:
     "A vibrant and airy collection inspired by coastal summers. Featuring lightweight fabrics, pastel hues, and breezy silhouettes perfect for beachside lounging and seaside soirées.",
-  budget: 50000,
+  budget: ethers.BigNumber.from(50000),
   startDate: "2023-09-01",
+  clientId: "client123",
+  designs: [],
+  contractAddress: "0x1234567890123456789012345678901234567890",
 };
 
 const ProjectDetailsPage: React.FC = () => {
@@ -62,7 +59,7 @@ const ProjectDetailsPage: React.FC = () => {
         <div className="absolute bottom-4 left-4 right-4 text-white">
           <h1 className="text-4xl font-bold mb-2">{projectDetails.title}</h1>
           <p className="text-xl opacity-80">
-            Designed by {projectDetails.designer}
+            Designed by {projectDetails.designerId}
           </p>
         </div>
       </div>
@@ -111,8 +108,8 @@ const ProjectDetailsPage: React.FC = () => {
         </Card>
 
         <ProjectStats
-          budget={projectDetails.budget || 0}
-          expenses={projectDetails.budget || 0}
+          budget={projectDetails.budget?.toNumber() || 0}
+          expenses={projectDetails.budget?.toNumber() || 0}
           completedPieces={projectDetails.piecesCount}
           totalDays={projectDetails.piecesCount}
           totalPieces={projectDetails.piecesCount}

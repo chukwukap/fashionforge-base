@@ -26,16 +26,20 @@ export const AddClientModal: React.FC<AddClientModalProps> = ({
   const [bust, setBust] = useState("");
   const [waist, setWaist] = useState("");
   const [hips, setHips] = useState("");
+  const [height, setHeight] = useState("");
+  const [weight, setWeight] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onAddClient({
-      name,
-      email,
+      clientId: name,
+
       measurements: {
         bust: parseFloat(bust),
         waist: parseFloat(waist),
         hips: parseFloat(hips),
+        height: parseFloat(height),
+        weight: parseFloat(weight),
       },
     });
     onClose();
@@ -94,6 +98,26 @@ export const AddClientModal: React.FC<AddClientModalProps> = ({
               type="number"
               value={hips}
               onChange={(e) => setHips(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <Label htmlFor="height">Height (cm)</Label>
+            <Input
+              id="height"
+              type="number"
+              value={height}
+              onChange={(e) => setHeight(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <Label htmlFor="weight">Weight (kg)</Label>
+            <Input
+              id="weight"
+              type="number"
+              value={weight}
+              onChange={(e) => setWeight(e.target.value)}
               required
             />
           </div>

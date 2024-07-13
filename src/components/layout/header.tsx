@@ -1,4 +1,3 @@
-"use client";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
@@ -13,8 +12,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { usePrizy } from "@/lib/hooks/usePrivy";
+import { useUserStore } from "@/lib/store/useUserStore";
 import Image from "next/image";
+import { usePrivy } from "@privy-io/react-auth";
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -22,7 +22,8 @@ const Header: React.FC = () => {
   const router = useRouter();
   const pathName = usePathname();
 
-  const { handleLogin, handleLogout, authenticated, user } = usePrizy();
+  const { user, loading } = useUserStore.getState();
+  const { login, logout } = usePrivy();
 
   const navItems = [
     { name: "Home", href: "/" },
@@ -46,9 +47,8 @@ const Header: React.FC = () => {
       transition={{ type: "spring", stiffness: 100 }}
       className="fixed w-full bg-white shadow-md z-50"
     >
-      {/* Header content */}
       <header
-        className={`fixed w-full z-50 transition-all duration-300  ${
+        className={`fixed w-full z-50 transition-all duration-300 ${
           isScrolled
             ? "bg-white/70 backdrop-blur-lg shadow-md"
             : "bg-transparent"
@@ -106,7 +106,7 @@ const Header: React.FC = () => {
                 </div>
               </div>
 
-              {authenticated ? (
+              {user ? (
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button
@@ -141,14 +141,14 @@ const Header: React.FC = () => {
                       Settings
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem onSelect={handleLogout}>
+                    <DropdownMenuItem onSelect={logout}>
                       Sign out
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
               ) : (
                 <Button
-                  onClick={handleLogin}
+                  onClick={login}
                   className="bg-amber-600 hover:bg-amber-700 text-white font-semibold py-2 px-4 rounded-full transition-colors duration-200"
                 >
                   Sign in
@@ -210,7 +210,7 @@ const Header: React.FC = () => {
               </div>
               <div className="pt-4 pb-3 border-t border-gray-200">
                 <div className="px-2 space-y-1">
-                  {authenticated ? (
+                  {user ? (
                     <>
                       <Link
                         href="/profile"
@@ -231,7 +231,7 @@ const Header: React.FC = () => {
                         Settings
                       </Link>
                       <button
-                        onClick={handleLogout}
+                        onClick={logout}
                         className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-amber-600 hover:bg-amber-50"
                       >
                         Sign out
@@ -239,7 +239,7 @@ const Header: React.FC = () => {
                     </>
                   ) : (
                     <button
-                      onClick={handleLogin}
+                      onClick={login}
                       className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-amber-600 hover:text-amber-700 hover:bg-amber-50"
                     >
                       Sign in

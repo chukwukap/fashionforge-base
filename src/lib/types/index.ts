@@ -279,7 +279,7 @@ function mapPrivyUserToAppUser(privyUser: PrivyUser, role: UserRole): User {
     id: privyUser.id,
     privy_id: privyUser.id,
     email: privyUser.email?.address || "",
-    name: privyUser.name || "",
+    name: privyUser.email?.address || "",
     walletAddress: privyUser.wallet?.address,
     createdAt: new Date(),
     updatedAt: new Date(),

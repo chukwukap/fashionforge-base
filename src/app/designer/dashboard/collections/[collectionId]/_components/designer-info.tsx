@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { FacebookIcon, InstagramIcon, TwitterIcon } from "lucide-react";
+import { FacebookIcon, InstagramIcon, XIcon } from "lucide-react";
 
 interface DesignerInfoProps {
   designer: {
@@ -53,7 +53,7 @@ export const DesignerInfo: React.FC<DesignerInfoProps> = ({
         </div>
         <div className="flex justify-center space-x-4">
           <a href="#" className="text-gray-4000 hover:text-blue-500">
-            <TwitterIcon className="w-6 h-6" />
+            <XIcon className="w-6 h-6" />
           </a>
           <a href="#" className="text-gray-400 hover:text-pink-500">
             <InstagramIcon className="w-6 h-6" />

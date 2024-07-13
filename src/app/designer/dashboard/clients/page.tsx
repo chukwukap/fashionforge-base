@@ -1,21 +1,23 @@
 "use client";
 
 import { useState } from "react";
-import { ClientMeasurement } from "@/lib/types";
+import { ClientMeasurement, ClientUser } from "@/lib/types";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Search } from "lucide-react";
 
-const sampleClients: ClientMeasurement[] = [
+type ClientSummary = Pick<ClientUser, "id" | "name" | "email">;
+
+const sampleClientsMeasurements: ClientMeasurement[] = [
   {
     id: "1",
-    name: "Alice Johnson",
-    email: "alice@example.com",
-    projectStatus: "In Progress",
+    clientId: "1",
     measurements: {
       bust: 36,
       waist: 28,
       hips: 38,
+      height: 165,
+      weight: 60,
     },
     customMeasurements: {
       "Shoulder Width": 16,
@@ -24,21 +26,38 @@ const sampleClients: ClientMeasurement[] = [
   },
   {
     id: "2",
-    name: "Bob Smith",
-    email: "bob@example.com",
-    projectStatus: "Completed",
+    clientId: "2",
     measurements: {
       bust: 40,
       waist: 34,
       hips: 42,
+      height: 180,
+      weight: 75,
     },
   },
 ];
 
+const sampleClients: ClientSummary[] = [
+  {
+    id: "1",
+    name: "Alice Johnson",
+    email: "alice@example.com",
+  },
+  {
+    id: "2",
+    name: "Bob Smith",
+    email: "bob@example.com",
+  },
+];
+
 export default function DesignerClientsPage() {
-  const [clients] = useState<ClientMeasurement[]>(sampleClients);
-  const [selectedClient, setSelectedClient] =
-    useState<ClientMeasurement | null>(null);
+  const [clients] = useState<ClientSummary[]>(sampleClients);
+  const [clientMeasurements] = useState<ClientMeasurement[]>(
+    sampleClientsMeasurements
+  );
+  const [selectedClient, setSelectedClient] = useState<ClientSummary | null>(
+    null
+  );
   const [searchTerm, setSearchTerm] = useState("");
 
   const filteredClients = clients.filter(
@@ -46,6 +65,10 @@ export default function DesignerClientsPage() {
       client.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       client.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const getClientMeasurements = (clientId: string) => {
+    return clientMeasurements.find((cm) => cm.clientId === clientId);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-amber-50 p-6">
@@ -82,7 +105,7 @@ export default function DesignerClientsPage() {
                       {client.name}
                     </div>
                     <div className="text-sm text-gray-500">{client.email}</div>
-                    <div
+                    {/* <div
                       className={`text-sm mt-1 ${
                         client.projectStatus === "In Progress"
                           ? "text-amber-600"
@@ -90,7 +113,7 @@ export default function DesignerClientsPage() {
                       }`}
                     >
                       {client.projectStatus}
-                    </div>
+                    </div> */}
                   </li>
                 ))}
               </ul>
@@ -104,34 +127,52 @@ export default function DesignerClientsPage() {
                   <p className="text-gray-600 mb-4">
                     Email: {selectedClient.email}
                   </p>
-                  <h3 className="text-xl font-semibold mt-4 mb-2 text-indigo-600">
-                    Measurements
-                  </h3>
-                  <ul className="space-y-2">
-                    {Object.entries(selectedClient.measurements).map(
-                      ([key, value]) => (
-                        <li key={key} className="text-gray-700">
-                          {key.charAt(0).toUpperCase() + key.slice(1)}: {value}
-                        </li>
-                      )
-                    )}
-                  </ul>
-                  {selectedClient.customMeasurements && (
-                    <>
-                      <h3 className="text-xl font-semibold mt-4 mb-2 text-indigo-600">
-                        Custom Measurements
-                      </h3>
-                      <ul className="space-y-2">
-                        {Object.entries(selectedClient.customMeasurements).map(
-                          ([key, value]) => (
-                            <li key={key} className="text-gray-700">
-                              {key}: {value}
-                            </li>
-                          )
-                        )}
-                      </ul>
-                    </>
-                  )}
+                  {(() => {
+                    const measurements = getClientMeasurements(
+                      selectedClient.id
+                    );
+                    if (measurements) {
+                      return (
+                        <>
+                          <h3 className="text-xl font-semibold mt-4 mb-2 text-indigo-600">
+                            Measurements
+                          </h3>
+                          <ul className="space-y-2">
+                            {Object.entries(measurements.measurements).map(
+                              ([key, value]) => (
+                                <li key={key} className="text-gray-700">
+                                  {key.charAt(0).toUpperCase() + key.slice(1)}:{" "}
+                                  {value}
+                                </li>
+                              )
+                            )}
+                          </ul>
+                          {measurements.customMeasurements && (
+                            <>
+                              <h3 className="text-xl font-semibold mt-4 mb-2 text-indigo-600">
+                                Custom Measurements
+                              </h3>
+                              <ul className="space-y-2">
+                                {Object.entries(
+                                  measurements.customMeasurements
+                                ).map(([key, value]) => (
+                                  <li key={key} className="text-gray-700">
+                                    {key}: {value}
+                                  </li>
+                                ))}
+                              </ul>
+                            </>
+                          )}
+                        </>
+                      );
+                    } else {
+                      return (
+                        <p className="text-gray-600">
+                          No measurements found for this client.
+                        </p>
+                      );
+                    }
+                  })()}
                 </div>
               ) : (
                 <div className="flex items-center justify-center h-full text-gray-500">

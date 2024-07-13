@@ -1,6 +1,4 @@
 "use client";
-import Image from "next/image";
-import { LoginButton } from "@/components/privy/login-button";
 import { HeroSection } from "./_components/hero-section";
 import { FeaturesSection } from "./_components/features-section";
 import { CTASection } from "./_components/call-to-action";

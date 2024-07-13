@@ -1,25 +1,41 @@
 import { NextResponse } from "next/server";
 import { ethers } from "ethers";
+import type { NextRequest } from "next/server";
 
 const contractABI = [
   /* Your contract ABI */
-];
+] as const;
+
 const contractAddress = process.env.CONTRACT_ADDRESS;
 
-export async function POST(request) {
+if (!contractAddress) {
+  throw new Error("CONTRACT_ADDRESS is not defined in environment variables");
+}
+
+export async function POST(request: NextRequest) {
   const { address } = await request.json();
+
+  if (!address || typeof address !== "string") {
+    return NextResponse.json({ error: "Invalid address" }, { status: 400 });
+  }
 
   // TODO: Implement proper authentication check here
   // For now, we'll assume the request is authenticated
 
   try {
-    const provider = new ethers.providers.JsonRpcProvider(process.env.RPC_URL);
-    const adminWallet = new ethers.Wallet(
-      process.env.ADMIN_PRIVATE_KEY,
-      provider
-    );
+    const rpcUrl = process.env.RPC_URL;
+    const adminPrivateKey = process.env.ADMIN_PRIVATE_KEY;
+
+    if (!rpcUrl || !adminPrivateKey) {
+      throw new Error(
+        "RPC_URL or ADMIN_PRIVATE_KEY is not defined in environment variables"
+      );
+    }
+
+    const provider = new ethers.providers.JsonRpcProvider(rpcUrl);
+    const adminWallet = new ethers.Wallet(adminPrivateKey, provider);
     const contract = new ethers.Contract(
-      contractAddress,
+      contractAddress!,
       contractABI,
       adminWallet
     );
@@ -44,6 +60,11 @@ export async function POST(request) {
   }
 }
 
-async function updateDesignerStatusInDatabase(address, status) {
+async function updateDesignerStatusInDatabase(
+  address: string,
+  status: string
+): Promise<void> {
   // Implement this function to update the designer status in your database
+  // For now, we'll just log the update
+  console.log(`Updating designer ${address} status to ${status}`);
 }

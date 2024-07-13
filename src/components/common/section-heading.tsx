@@ -13,7 +13,7 @@ interface Particle {
   speedX: number;
   speedY: number;
   color: string;
-  update: () => void;
+  update: (canvas: HTMLCanvasElement) => void;
   draw: (ctx: CanvasRenderingContext2D) => void;
 }
 
@@ -68,7 +68,7 @@ const SectionHeading: React.FC<SectionHeadingProps> = ({ title, subtitle }) => {
         this.color = `rgba(255, 191, 0, ${Math.random() * 0.5 + 0.5})`;
       }
 
-      update() {
+      update(canvas: HTMLCanvasElement) {
         this.x += this.speedX;
         this.y += this.speedY;
 
@@ -87,15 +87,17 @@ const SectionHeading: React.FC<SectionHeadingProps> = ({ title, subtitle }) => {
     }
 
     function createParticles() {
+      if (!canvas) return;
       for (let i = 0; i < particleCount; i++) {
         particles.push(new ParticleImpl(canvas));
       }
     }
 
     function animateParticles() {
+      if (!canvas || !ctx) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       for (let i = 0; i < particles.length; i++) {
-        particles[i].update();
+        particles[i].update(canvas);
         particles[i].draw(ctx);
         if (particles[i].size <= 0.2) {
           particles[i] = new ParticleImpl(canvas);

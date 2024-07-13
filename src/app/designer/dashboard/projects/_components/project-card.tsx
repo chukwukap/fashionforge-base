@@ -81,10 +81,18 @@ export function ProjectCard({ project }: any) {
             </span>
             {project.type && (
               <span className="flex items-center">
-                {projectTypeIcons[project.type] &&
-                  React.createElement(projectTypeIcons[project.type], {
-                    className: "h-4 w-4 mr-1",
-                  })}
+                {project.type &&
+                  projectTypeIcons[
+                    project.type as keyof typeof projectTypeIcons
+                  ] &&
+                  React.createElement(
+                    projectTypeIcons[
+                      project.type as keyof typeof projectTypeIcons
+                    ],
+                    {
+                      className: "h-4 w-4 mr-1",
+                    }
+                  )}
                 {project.type}
               </span>
             )}
@@ -94,11 +102,7 @@ export function ProjectCard({ project }: any) {
               <span>Progress</span>
               <span>{project.progress}%</span>
             </div>
-            <Progress
-              value={project.progress}
-              className="h-2"
-              indicatorClassName="bg-rose-500"
-            />
+            <Progress value={project.progress} className="h-2 bg-rose-500" />
           </div>
         </div>
       </div>

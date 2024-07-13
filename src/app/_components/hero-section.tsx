@@ -44,16 +44,12 @@ const HeroSection: React.FC = () => {
   }, [mouseX, mouseY]);
 
   const particleCount = 50;
-  const particles = Array.from({ length: particleCount }).map((_, i) => {
-    const x = useTransform(mouseX, [0, 1], [-50, 50]);
-    const y = useTransform(mouseY, [0, 1], [-50, 50]);
-    return {
-      x,
-      y,
-      initialX: Math.random() * 100,
-      initialY: Math.random() * 100,
-    };
-  });
+  const particles = Array.from({ length: particleCount }).map((_, i) => ({
+    initialX: Math.random() * 100,
+    initialY: Math.random() * 100,
+  }));
+  const particleX = useTransform(mouseX, [0, 1], [-50, 50]);
+  const particleY = useTransform(mouseY, [0, 1], [-50, 50]);
 
   return (
     <motion.section
@@ -87,8 +83,8 @@ const HeroSection: React.FC = () => {
           key={index}
           className="absolute w-2 h-2 bg-amber-300 rounded-full"
           style={{
-            x: particle.x,
-            y: particle.y,
+            x: particleX,
+            y: particleY,
             left: `${particle.initialX}%`,
             top: `${particle.initialY}%`,
           }}

@@ -48,20 +48,20 @@ export default function ClientDetails({
           className="space-y-4"
         >
           <Input
-            label="Name"
-            value={editedClient.name}
+            placeholder="Name"
+            value={editedClient.clientId}
             onChange={(e) => handleInputChange("name", e.target.value)}
           />
           <Input
-            label="Email"
-            value={editedClient.email}
+            placeholder="Email"
+            value={editedClient.clientId}
             onChange={(e) => handleInputChange("email", e.target.value)}
           />
           <h3 className="font-semibold mt-4">Measurements</h3>
           {Object.entries(editedClient.measurements).map(([key, value]) => (
             <Input
               key={key}
-              label={key.charAt(0).toUpperCase() + key.slice(1)}
+              placeholder={key.charAt(0).toUpperCase() + key.slice(1)}
               value={value}
               onChange={(e) => handleInputChange(key, e.target.value)}
               type="number"
@@ -74,7 +74,7 @@ export default function ClientDetails({
                 ([key, value]) => (
                   <Input
                     key={key}
-                    label={key}
+                    placeholder={key}
                     value={value}
                     onChange={(e) => handleInputChange(key, e.target.value)}
                     type="number"

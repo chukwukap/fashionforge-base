@@ -25,8 +25,8 @@ export default function ClientList({
             }`}
             onClick={() => onSelectClient(client)}
           >
-            <h3 className="font-medium">{client.name}</h3>
-            <p className="text-sm opacity-70">{client.email}</p>
+            <h3 className="font-medium">{client.clientId}</h3>
+            <p className="text-sm opacity-70">{client.clientId}</p>
           </div>
         ))}
       </div>
