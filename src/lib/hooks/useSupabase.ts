@@ -58,7 +58,7 @@ export const useSupabaseUserAndRoles = () => {
         if (rolesError) {
           console.error("Error fetching user roles:", rolesError);
         } else {
-          setUserRoles(rolesData);
+          setUserRoles(rolesData.map((item) => item.roles).flat());
         }
       }
       setLoading(false);

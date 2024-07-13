@@ -64,7 +64,8 @@
     "three": "^0.166.1",
     "tsparticles": "^3.5.0",
     "viem": "^2.17.3",
-    "wagmi": "^2.10.9"
+    "wagmi": "^2.10.9",
+    "zustand": "^4.5.4"
   },
   "devDependencies": {
     "@types/chroma-js": "^2.4.4",

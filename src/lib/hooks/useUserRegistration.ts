@@ -14,7 +14,7 @@ export function useUserRegistration() {
       .insert({
         privy_id: privyUser.id,
         email: privyUser.email?.address,
-        name: privyUser.name,
+        name: privyUser.email?.address,
         role: role,
         walletAddress: privyUser.wallet?.address,
       })
