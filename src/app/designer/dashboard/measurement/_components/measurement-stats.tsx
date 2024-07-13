@@ -85,7 +85,7 @@ export const MeasurementStats: React.FC<MeasurementStatsProps> = ({
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold truncate">
-            {clients[clients.length - 1]?.name || "N/A"}
+            {clients[clients.length - 1]?.clientId || "N/A"}
           </div>
           <p className="text-xs text-amber-100">Most recent addition</p>
         </CardContent>
