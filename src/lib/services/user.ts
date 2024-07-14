@@ -85,4 +85,9 @@ export const userService = {
       setError(error?.toString() || null);
     }
   },
+  getUserByPrivyId: async (privyId: string) => {
+    const response = await fetch(`/api/users/privy/${privyId}`);
+    if (!response.ok) throw new Error("Failed to fetch user");
+    return response.json();
+  },
 };

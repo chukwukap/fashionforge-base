@@ -1,33 +1,44 @@
-import { useAccount, useSignMessage } from "wagmi";
-import { useEffect, useCallback } from "react";
-import { useUserStore } from "@/lib/store/useUserStore";
-import { UserRole } from "@/lib/types";
+import { useState, useEffect } from "react";
+import { User, UserRole } from "@prisma/client";
+import { userService } from "@/lib/services/user";
 
-export function useUser() {
-  const { address, isConnected } = useAccount();
-  const { signMessageAsync } = useSignMessage();
-  const { user, loading, isNewUser, fetchUser, setUserRole } =
-    useUserStore.getState();
-
-  const refetchUser = useCallback(() => {
-    if (isConnected && address) {
-      fetchUser(address);
-    }
-  }, [isConnected, address, fetchUser]);
+export function useUser(privyId: string | null) {
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    refetchUser();
-  }, [refetchUser]);
+    async function fetchUser() {
+      if (!privyId) {
+        setLoading(false);
+        return;
+      }
 
-  const setRole = async (role: UserRole) => {
-    if (!address) return;
+      try {
+        const userData = await userService.getUserByPrivyId(privyId);
+        setUser(userData);
+      } catch (err) {
+        setError("Failed to fetch user");
+        console.error("Error fetching user:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
 
-    const message = `Sign this message to verify your wallet address and set your role as ${role}`;
-    const signature = await signMessageAsync({ message });
+    fetchUser();
+  }, [privyId]);
 
-    await setUserRole(address, role, signature);
-    refetchUser(); // Refetch user after setting role
+  const updateUserRole = async (role: UserRole) => {
+    if (!user) return;
+
+    try {
+      await userService.updateUserRoleAndStatus(user.id, role);
+      setUser((prevUser) => (prevUser ? { ...prevUser, role } : null));
+    } catch (err) {
+      setError("Failed to update user role");
+      console.error("Error updating user role:", err);
+    }
   };
 
-  return { user, loading, isNewUser, setRole, refetchUser };
+  return { user, loading, error, updateUserRole };
 }

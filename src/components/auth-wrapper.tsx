@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { usePrivy } from "@privy-io/react-auth";
+import { usePrivy, useLogin } from "@privy-io/react-auth";
 import { useRouter } from "next/navigation";
 import { UserTypeSelection } from "./forms/user-type";
 import { userService } from "@/lib/services/user";
@@ -17,16 +17,30 @@ export const AuthWrapper: React.FC<AuthWrapperProps> = ({
   allowedRoles,
 }) => {
   const { ready, authenticated, user } = usePrivy();
+  const { login } = useLogin({
+    onComplete: async (user, isNewUser) => {
+      if (isNewUser) {
+        await userService.createUser({
+          privyId: user.id,
+          email: user.email?.address,
+        });
+      }
+      await checkUserRole(user.id);
+    },
+  });
   const [userRole, setUserRole] = useState<UserRole | null>(null);
   const [isNewUser, setIsNewUser] = useState<boolean | null>(null);
   const router = useRouter();
 
+  const checkUserRole = async (userId: string) => {
+    const role = await userService.getUserRole(userId);
+    setUserRole(role);
+    setIsNewUser(role === null);
+  };
+
   useEffect(() => {
     if (authenticated && user) {
-      userService.getUserRole(user.id).then((role) => {
-        setUserRole(role);
-        setIsNewUser(role === null);
-      });
+      checkUserRole(user.id);
     }
   }, [authenticated, user]);
 
@@ -35,7 +49,7 @@ export const AuthWrapper: React.FC<AuthWrapperProps> = ({
   }
 
   if (!authenticated) {
-    router.push("/login");
+    login();
     return null;
   }
 
@@ -43,10 +57,10 @@ export const AuthWrapper: React.FC<AuthWrapperProps> = ({
     return <div>Checking user status...</div>;
   }
 
-  if (isNewUser) {
+  if (isNewUser && user) {
     return (
       <UserTypeSelection
-        userId={user?.id}
+        userId={user.id}
         setUserRole={setUserRole}
         setIsNewUser={setIsNewUser}
       />

@@ -15,7 +15,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useUserStore } from "@/lib/store/useUserStore";
 import Image from "next/image";
-import { usePrivy } from "@privy-io/react-auth";
+import { useLogin, usePrivy } from "@privy-io/react-auth";
+import { useUser } from "@/lib/hooks/useUser";
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -23,7 +24,7 @@ const Header: React.FC = () => {
   const router = useRouter();
   const pathName = usePathname();
 
-  const { user, loading } = useUserStore.getState();
+  const { user, loading } = useUser();
   const { login, logout } = usePrivy();
 
   const navItems = [
