@@ -46,12 +46,12 @@ const Header: React.FC = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ type: "spring", stiffness: 100 }}
-      className="fixed w-full bg-white shadow-md z-50"
+      className="fixed w-full bg-background shadow-md z-50"
     >
       <header
         className={`fixed w-full z-50 transition-all duration-300 ${
           isScrolled
-            ? "bg-white/70 backdrop-blur-lg shadow-md"
+            ? "bg-background/70 backdrop-blur-lg shadow-md"
             : "bg-transparent"
         }`}
       >
@@ -75,10 +75,10 @@ const Header: React.FC = () => {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="group relative text-base font-medium text-gray-600 hover:text-amber-600 transition-colors duration-200"
+                  className="group relative text-base font-medium text-foreground hover:text-primary transition-colors duration-200"
                 >
                   {item.name}
-                  <span className="absolute inset-x-0 bottom-0 h-0.5 bg-amber-600 transform origin-left scale-x-0 transition-transform duration-200 ease-out group-hover:scale-x-100" />
+                  <span className="absolute inset-x-0 bottom-0 h-0.5 bg-primary transform origin-left scale-x-0 transition-transform duration-200 ease-out group-hover:scale-x-100" />
                 </Link>
               ))}
             </nav>
@@ -88,12 +88,12 @@ const Header: React.FC = () => {
               <div className="relative">
                 <Input
                   type="search"
-                  className="w-64 pl-10 pr-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-600 focus:border-transparent bg-white/50 backdrop-blur-sm"
+                  className="w-64 pl-10 pr-4 py-2 rounded-full border border-input focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-background/50 backdrop-blur-sm"
                   placeholder="Search designs, collections..."
                 />
                 <div className="absolute left-3 top-2.5">
                   <svg
-                    className="h-5 w-5 text-gray-400"
+                    className="h-5 w-5 text-muted-foreground"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
@@ -112,7 +112,7 @@ const Header: React.FC = () => {
                   <DropdownMenuTrigger asChild>
                     <Button
                       variant="ghost"
-                      className="relative rounded-full bg-amber-100 p-1 text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500"
+                      className="relative rounded-full bg-secondary p-1 text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                     >
                       <span className="sr-only">Open user menu</span>
                       <Image
@@ -125,7 +125,7 @@ const Header: React.FC = () => {
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent
-                    className="mt-2 w-48 bg-white/80 backdrop-blur-lg"
+                    className="mt-2 w-48 bg-popover/80 backdrop-blur-lg"
                     align="end"
                   >
                     <DropdownMenuLabel>My Account</DropdownMenuLabel>
@@ -150,7 +150,7 @@ const Header: React.FC = () => {
               ) : (
                 <Button
                   onClick={login}
-                  className="bg-amber-600 hover:bg-amber-700 text-white font-semibold py-2 px-4 rounded-full transition-colors duration-200"
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-2 px-4 rounded-full transition-colors duration-200"
                 >
                   Sign in
                 </Button>
@@ -161,7 +161,7 @@ const Header: React.FC = () => {
             <div className="md:hidden">
               <Button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="bg-amber-100 rounded-md p-2 inline-flex items-center justify-center text-amber-600 hover:text-amber-700 hover:bg-amber-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-amber-500"
+                className="bg-secondary rounded-md p-2 inline-flex items-center justify-center text-primary hover:text-primary/90 hover:bg-secondary/80 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"
               >
                 <span className="sr-only">Open menu</span>
                 <svg
@@ -192,7 +192,7 @@ const Header: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.2 }}
-              className="absolute top-full left-0 w-full bg-white/90 backdrop-blur-lg shadow-lg md:hidden"
+              className="absolute top-full left-0 w-full bg-background/90 backdrop-blur-lg shadow-lg md:hidden"
             >
               <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 {navItems.map((item) => (
@@ -201,39 +201,39 @@ const Header: React.FC = () => {
                     href={item.href}
                     className={`block px-3 py-2 rounded-md text-base font-medium ${
                       pathName === item.href
-                        ? "text-amber-600 bg-amber-50"
-                        : "text-gray-700 hover:text-amber-600 hover:bg-amber-50"
+                        ? "text-primary bg-primary/10"
+                        : "text-foreground hover:text-primary hover:bg-primary/10"
                     }`}
                   >
                     {item.name}
                   </Link>
                 ))}
               </div>
-              <div className="pt-4 pb-3 border-t border-gray-200">
+              <div className="pt-4 pb-3 border-t border-border">
                 <div className="px-2 space-y-1">
                   {user ? (
                     <>
                       <Link
                         href="/profile"
-                        className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-amber-600 hover:bg-amber-50"
+                        className="block px-3 py-2 rounded-md text-base font-medium text-foreground hover:text-primary hover:bg-primary/10"
                       >
                         Profile
                       </Link>
                       <Link
                         href="/dashboard"
-                        className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-amber-600 hover:bg-amber-50"
+                        className="block px-3 py-2 rounded-md text-base font-medium text-foreground hover:text-primary hover:bg-primary/10"
                       >
                         Dashboard
                       </Link>
                       <Link
                         href="/settings"
-                        className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-amber-600 hover:bg-amber-50"
+                        className="block px-3 py-2 rounded-md text-base font-medium text-foreground hover:text-primary hover:bg-primary/10"
                       >
                         Settings
                       </Link>
                       <button
                         onClick={logout}
-                        className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-amber-600 hover:bg-amber-50"
+                        className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-foreground hover:text-primary hover:bg-primary/10"
                       >
                         Sign out
                       </button>
@@ -241,7 +241,7 @@ const Header: React.FC = () => {
                   ) : (
                     <button
                       onClick={login}
-                      className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-amber-600 hover:text-amber-700 hover:bg-amber-50"
+                      className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-primary hover:text-primary/90 hover:bg-primary/10"
                     >
                       Sign in
                     </button>

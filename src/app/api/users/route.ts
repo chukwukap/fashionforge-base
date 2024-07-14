@@ -1,68 +1,45 @@
-import { NextRequest, NextResponse } from "next/server";
-import { ethers } from "ethers";
+import { NextResponse } from "next/server";
+import { PrismaClient } from "@prisma/client";
 
-const contractABI = [
-  /* Your contract ABI */
-] as const;
-const contractAddress = process.env.CONTRACT_ADDRESS;
+const prisma = new PrismaClient();
 
-export async function POST(request: NextRequest) {
-  const { address, userType } = await request.json();
-
-  try {
-    if (
-      !process.env.RPC_URL ||
-      !process.env.ADMIN_PRIVATE_KEY ||
-      !contractAddress
-    ) {
-      throw new Error("Missing environment variables");
-    }
-
-    const provider = new ethers.JsonRpcProvider(process.env.RPC_URL);
-    const adminWallet = new ethers.Wallet(
-      process.env.ADMIN_PRIVATE_KEY,
-      provider
-    );
-    const contract = new ethers.Contract(
-      contractAddress,
-      contractABI,
-      adminWallet
-    );
-
-    let roleBytes32: string;
-    if (userType === "CLIENT") {
-      roleBytes32 = ethers.id("CLIENT_ROLE");
-      // Assign CLIENT role immediately
-      const tx = await contract.assignRole(address, roleBytes32);
-      await tx.wait();
-    } else if (userType === "DESIGNER") {
-      // For designers, we'll just store their preference and verify later
-      await storeDesignerApplication(address);
-    } else {
-      return NextResponse.json({ error: "Invalid user type" }, { status: 400 });
-    }
-
-    // Update user type in your database
-    await updateUserTypeInDatabase(address, userType);
-
-    return NextResponse.json({
-      success: true,
-      message: "User type set successfully",
-    });
-  } catch (error) {
-    console.error("Error setting user type:", error);
-    return NextResponse.json(
-      { error: "Failed to set user type" },
-      { status: 500 }
-    );
-  }
+export async function GET() {
+  const users = await prisma.user.findMany();
+  return NextResponse.json(users);
 }
 
-async function storeDesignerApplication(address: `0x${string}`) {
-  // Implement this function to store the designer application for later verification
-  // This could be a database entry, a notification to admins, etc.
+export async function POST(request: Request) {
+  const data = await request.json();
+  const user = await prisma.user.create({ data });
+  return NextResponse.json(user);
 }
 
-async function updateUserTypeInDatabase(address: `0x${string}`, userType: any) {
-  // Implement this function to update the user type in your database
-}
+// import React, { useEffect } from 'react';
+// import { useUser } from '@/hooks/useUser';
+// import { User } from '@prisma/client';
+
+// interface UserListProps {
+//   initialUsers: User[];
+// }
+
+// export const UserList: React.FC<UserListProps> = ({ initialUsers }) => {
+//   const { users, setUsers, loading, error } = useUser();
+
+//   useEffect(() => {
+//     setUsers(initialUsers);
+//   }, [initialUsers, setUsers]);
+
+//   if (loading) return <div>Loading users...</div>;
+//   if (error) return <div>Error: {error}</div>;
+
+//   return (
+//     <div>
+//       <h1>Users</h1>
+//       <ul>
+//         {users.map((user) => (
+//           <li key={user.id}>{user.name}</li>
+//         ))}
+//       </ul>
+//     </div>
+//   );
+// };

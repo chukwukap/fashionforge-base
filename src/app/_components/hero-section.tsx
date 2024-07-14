@@ -54,7 +54,7 @@ const HeroSection: React.FC = () => {
   return (
     <motion.section
       ref={containerRef}
-      className="relative h-screen flex items-center justify-center overflow-hidden"
+      className="relative h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary/10 via-background to-secondary/10"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
@@ -74,19 +74,20 @@ const HeroSection: React.FC = () => {
             backgroundImage: `url('${fashionImages[currentImageIndex]}')`,
           }}
         />
-        <div className="absolute inset-0 bg-black opacity-50" />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/50 via-transparent to-secondary/50 mix-blend-overlay" />
       </motion.div>
 
       {/* Particle Effect */}
       {particles.map((particle, index) => (
         <motion.div
           key={index}
-          className="absolute w-2 h-2 bg-amber-300 rounded-full"
+          className="absolute w-2 h-2 rounded-full"
           style={{
             x: particleX,
             y: particleY,
             left: `${particle.initialX}%`,
             top: `${particle.initialY}%`,
+            background: index % 2 === 0 ? "var(--primary)" : "var(--secondary)",
           }}
           animate={{
             scale: [1, 1.5, 1],
@@ -101,9 +102,9 @@ const HeroSection: React.FC = () => {
       ))}
 
       {/* Content */}
-      <div className="relative z-10 text-center text-white max-w-4xl px-4">
+      <div className="relative z-10 text-center text-primary-foreground max-w-4xl px-4">
         <motion.h1
-          className="text-5xl sm:text-6xl md:text-8xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500"
+          className="text-5xl sm:text-6xl md:text-8xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary via-accent to-secondary"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -111,7 +112,7 @@ const HeroSection: React.FC = () => {
           FashionForge
         </motion.h1>
         <motion.p
-          className="text-lg sm:text-xl md:text-3xl mb-8 font-light"
+          className="text-lg sm:text-xl md:text-3xl mb-8 font-light text-foreground"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
@@ -136,8 +137,8 @@ const HeroSection: React.FC = () => {
             key={index}
             className={`w-2 h-2 z-50 rounded-full transition-all duration-300 ${
               index === currentImageIndex
-                ? "bg-white scale-125"
-                : "bg-white/50 hover:bg-white/75"
+                ? "bg-primary scale-125"
+                : "bg-primary/50 hover:bg-primary/75"
             }`}
             onClick={() => setCurrentImageIndex(index)}
           />
@@ -159,8 +160,8 @@ const CTAButton: React.FC<CTAButtonProps> = ({ text, primary }) => {
     <motion.button
       className={`relative overflow-hidden px-8 py-3 rounded-full text-lg font-semibold transition-all duration-300 ${
         primary
-          ? "bg-gradient-to-r from-pink-500 to-red-500 text-white"
-          : "bg-transparent border-2 border-white text-white hover:bg-white hover:text-black"
+          ? "bg-primary text-primary-foreground"
+          : "bg-transparent border-2 border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground"
       }`}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
@@ -170,7 +171,7 @@ const CTAButton: React.FC<CTAButtonProps> = ({ text, primary }) => {
       <span className="relative z-10">{text}</span>
       {primary && (
         <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-orange-500"
+          className="absolute inset-0 bg-gradient-to-r from-accent to-secondary"
           initial={{ x: "-100%" }}
           animate={{ x: isHovered ? 0 : "-100%" }}
           transition={{ duration: 0.3 }}

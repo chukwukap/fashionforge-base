@@ -7,12 +7,12 @@ const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gradient-to-r from-stone-100 to-amber-50 text-stone-800">
+    <footer className="bg-primary text-primary-foreground">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           <div className="space-y-4">
-            <h3 className="text-2xl font-bold text-amber-600">FashionForge</h3>
-            <p className="text-sm text-stone-600">
+            <h3 className="text-2xl font-bold text-accent">FashionForge</h3>
+            <p className="text-sm opacity-80">
               Empowering fashion designers worldwide through blockchain
               technology.
             </p>
@@ -22,7 +22,7 @@ const Footer: React.FC = () => {
                   <a
                     key={social}
                     href="#"
-                    className="text-stone-400 hover:text-amber-500 transition-colors"
+                    className="text-primary-foreground opacity-80 hover:opacity-100 hover:text-accent transition-colors"
                   >
                     <span className="sr-only">{social}</span>
                     <svg
@@ -43,16 +43,14 @@ const Footer: React.FC = () => {
             </div>
           </div>
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-amber-600">
-              Quick Links
-            </h4>
+            <h4 className="text-lg font-semibold text-accent">Quick Links</h4>
             <ul className="space-y-2 text-sm">
               {["About Us", "Find Designers", "Browse Projects", "FAQ"].map(
                 (item) => (
                   <li key={item}>
                     <Link
                       href={`/${item.toLowerCase().replace(/\s+/g, "-")}`}
-                      className="hover:text-amber-500 transition-colors"
+                      className="opacity-80 hover:opacity-100 hover:text-accent transition-colors"
                     >
                       {item}
                     </Link>
@@ -62,61 +60,63 @@ const Footer: React.FC = () => {
             </ul>
           </div>
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-amber-600">Contact Us</h4>
-            <address className="text-sm text-stone-600 not-italic">
+            <h4 className="text-lg font-semibold text-accent">Contact Us</h4>
+            <address className="text-sm opacity-80 not-italic">
               123 Fashion Street, Design District
               <br />
               City, Country 12345
               <br />
               <a
                 href="mailto:info@fashionforge.com"
-                className="hover:text-amber-500 transition-colors"
+                className="hover:opacity-100 hover:text-accent transition-colors"
               >
                 info@fashionforge.pro
               </a>
               <br />
               <a
                 href="tel:+11234567890"
-                className="hover:text-amber-500 transition-colors"
+                className="hover:opacity-100 hover:text-accent transition-colors"
               >
                 +234 913 071 8322
               </a>
             </address>
           </div>
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-amber-600">Newsletter</h4>
-            <p className="text-sm text-stone-600">
+            <h4 className="text-lg font-semibold text-accent">Newsletter</h4>
+            <p className="text-sm opacity-80">
               Stay updated with the latest in fashion and blockchain.
             </p>
             <form className="flex flex-col space-y-2">
               <Input
                 type="email"
                 placeholder="Your email"
-                className="bg-white border-amber-300 focus:border-amber-500"
+                className="bg-primary-foreground text-primary border-accent/20 focus:border-accent"
               />
               <Button
                 type="submit"
-                className="bg-amber-500 hover:bg-amber-600 text-white w-full"
+                className="bg-accent hover:bg-accent/90 text-primary"
               >
                 Subscribe
               </Button>
             </form>
           </div>
         </div>
-        <div className="border-t border-amber-200 pt-8 mt-8 flex flex-col sm:flex-row justify-between items-center">
-          <p className="text-sm text-stone-500">
+        <div className="border-t border-primary-foreground/20 pt-8 mt-8 flex flex-col sm:flex-row justify-between items-center">
+          <p className="text-sm opacity-80">
             © {currentYear} FashionForge. All rights reserved.
           </p>
           <nav className="flex space-x-4 mt-4 sm:mt-0">
-            {["Privacy Policy", "Terms of Service", ""].map((item) => (
-              <Link
-                key={item}
-                href={`/${item.toLowerCase().replace(/\s+/g, "-")}`}
-                className="text-sm text-stone-500 hover:text-amber-500 transition-colors"
-              >
-                {item}
-              </Link>
-            ))}
+            {["Privacy Policy", "Terms of Service", "Cookie Policy"].map(
+              (item) => (
+                <Link
+                  key={item}
+                  href={`/${item.toLowerCase().replace(/\s+/g, "-")}`}
+                  className="text-sm opacity-80 hover:opacity-100 hover:text-accent transition-colors"
+                >
+                  {item}
+                </Link>
+              )
+            )}
           </nav>
         </div>
       </div>

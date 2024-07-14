@@ -7,7 +7,6 @@ import { http } from "viem";
 import type { PrivyClientConfig } from "@privy-io/react-auth";
 import { PrivyProvider } from "@privy-io/react-auth";
 import { createConfig, WagmiProvider } from "@privy-io/wagmi";
-import SupabaseProvider from "./supabase-provider";
 import { TooltipProvider } from "./ui/tooltip";
 
 const queryClient = new QueryClient();
@@ -41,18 +40,15 @@ const privyConfig: PrivyClientConfig = {
 export default function Providers({ children }: { children: React.ReactNode }) {
   return (
     <PrivyProvider
-      // apiUrl={process.env.NEXT_PUBLIC_PRIVY_AUTH_URL as string}
       appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID as string}
       config={privyConfig}
     >
-      <SupabaseProvider>
-        <QueryClientProvider client={queryClient}>
-          {/* @ts-ignore */}
-          <WagmiProvider config={wagmiConfig}>
-            <TooltipProvider>{children}</TooltipProvider>
-          </WagmiProvider>
-        </QueryClientProvider>
-      </SupabaseProvider>
+      <QueryClientProvider client={queryClient}>
+        {/* @ts-ignore */}
+        <WagmiProvider config={wagmiConfig}>
+          <TooltipProvider>{children}</TooltipProvider>
+        </WagmiProvider>
+      </QueryClientProvider>
     </PrivyProvider>
   );
 }

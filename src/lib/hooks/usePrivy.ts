@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { usePrivy } from "@privy-io/react-auth";
-import { createClientComponent } from "@/lib/supabase";
+import { createClientComponent } from "@/lib/prisma";
 import { User } from "@/lib/types";
 
 export function usePrivyAuth() {

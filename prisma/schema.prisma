@@ -1,0 +1,323 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  CLIENT
+  DESIGNER
+  ADMIN
+}
+
+enum UserStatus {
+  ACTIVE
+  PENDING
+  SUSPENDED
+}
+
+model User {
+  id            String     @id @default(uuid())
+  privyId       String     @unique
+  email         String     @unique
+  name          String
+  avatar        String?
+  walletAddress String?    @unique
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  status        UserStatus
+  role          UserRole
+
+  clientProfile      ClientProfile?
+  designerProfile    DesignerProfile?
+  adminProfile       AdminProfile?
+  projectsAsClient   Project[]                 @relation("ClientProjects")
+  projectsAsDesigner Project[]                 @relation("DesignerProjects")
+  reviews            Review[]
+  notifications      Notification[]
+  sentMessages       Message[]                 @relation("SentMessages")
+  receivedMessages   Message[]                 @relation("ReceivedMessages")
+  conversations      ConversationParticipant[]
+}
+
+model ClientProfile {
+  id           String       @id @default(uuid())
+  user         User         @relation(fields: [userId], references: [id])
+  userId       String       @unique
+  measurements Measurement?
+}
+
+model DesignerProfile {
+  id                String       @id @default(uuid())
+  user              User         @relation(fields: [userId], references: [id])
+  userId            String       @unique
+  expertise         Expertise[]
+  yearsOfExperience Int
+  portfolio         String?
+  designs           Design[]
+  Collection        Collection[]
+}
+
+model AdminProfile {
+  id          String       @id @default(uuid())
+  user        User         @relation(fields: [userId], references: [id])
+  userId      String       @unique
+  permissions Permission[]
+}
+
+model Measurement {
+  id                 String        @id @default(uuid())
+  clientProfile      ClientProfile @relation(fields: [clientProfileId], references: [id])
+  clientProfileId    String        @unique
+  bust               Float
+  waist              Float
+  hips               Float
+  height             Float
+  weight             Float
+  customMeasurements Json?
+}
+
+model Expertise {
+  id               String            @id @default(uuid())
+  name             String            @unique
+  designerProfiles DesignerProfile[]
+}
+
+model Permission {
+  id            String         @id @default(uuid())
+  name          String         @unique
+  adminProfiles AdminProfile[]
+}
+
+enum ProjectStatus {
+  DRAFT
+  IN_PROGRESS
+  REVIEW
+  COMPLETED
+  CANCELLED
+}
+
+model Project {
+  id              String        @id @default(uuid())
+  title           String
+  description     String
+  client          User          @relation("ClientProjects", fields: [clientId], references: [id])
+  clientId        String
+  designer        User          @relation("DesignerProjects", fields: [designerId], references: [id])
+  designerId      String
+  status          ProjectStatus
+  progress        Float
+  startDate       DateTime
+  dueDate         DateTime
+  lastUpdate      DateTime
+  image           String
+  trend           String
+  teamSize        Int
+  commentsCount   Int
+  budget          Decimal       @db.Decimal(20, 8)
+  piecesCount     Int
+  contractAddress String
+  designs         Design[]
+  transactions    Transaction[]
+  reviews         Review[]
+}
+
+enum DesignStatus {
+  DRAFTED
+  MINTED
+  FOR_SALE
+  SOLD
+}
+
+model Design {
+  id           String          @id @default(uuid())
+  name         String
+  description  String
+  price        Decimal         @db.Decimal(20, 8)
+  likes        Int
+  views        Int
+  status       DesignStatus
+  designer     DesignerProfile @relation(fields: [designerId], references: [id])
+  designerId   String
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+  mainImage    String
+  variations   Variation[]
+  tags         Tag[]
+  collection   Collection      @relation(fields: [collectionId], references: [id])
+  collectionId String
+  tokenId      String?         @unique
+  project      Project?        @relation(fields: [projectId], references: [id])
+  projectId    String?
+}
+
+model Variation {
+  id       String @id @default(uuid())
+  name     String
+  image    String
+  design   Design @relation(fields: [designId], references: [id])
+  designId String
+}
+
+model Collection {
+  id          String          @id @default(uuid())
+  name        String
+  description String
+  imageUrl    String
+  designCount Int
+  tags        Tag[]
+  likes       Int
+  views       Int
+  createdAt   DateTime        @default(now())
+  designer    DesignerProfile @relation(fields: [designerId], references: [id])
+  designerId  String
+  designs     Design[]
+}
+
+model Tag {
+  id             String        @id @default(uuid())
+  name           String        @unique
+  designs        Design[]
+  collections    Collection[]
+  ColorPalette   ColorPalette? @relation(fields: [colorPaletteId], references: [id])
+  colorPaletteId String?
+}
+
+model Message {
+  id             String       @id @default(uuid())
+  conversation   Conversation @relation(fields: [conversationId], references: [id])
+  conversationId String
+  content        String
+  timestamp      DateTime     @default(now())
+  unread         Boolean      @default(true)
+  attachments    Json?
+  sender         User         @relation("SentMessages", fields: [senderId], references: [id])
+  senderId       String
+  receiver       User         @relation("ReceivedMessages", fields: [receiverId], references: [id])
+  receiverId     String
+}
+
+model Conversation {
+  id           String                    @id @default(uuid())
+  participants ConversationParticipant[]
+  messages     Message[]
+  lastMessage  String?
+  updatedAt    DateTime                  @updatedAt
+}
+
+model ConversationParticipant {
+  conversation   Conversation @relation(fields: [conversationId], references: [id])
+  conversationId String
+  user           User         @relation(fields: [userId], references: [id])
+  userId         String
+  unreadCount    Int          @default(0)
+
+  @@id([conversationId, userId])
+}
+
+enum FabricCategory {
+  COTTON
+  SILK
+  WOOL
+  SYNTHETIC
+  LINEN
+}
+
+model Fabric {
+  id           String         @id @default(uuid())
+  name         String
+  description  String
+  category     FabricCategory
+  imageUrl     String
+  texture      String
+  color        String
+  availability String
+  weight       Float
+  width        Float
+}
+
+model ColorPalette {
+  id     String   @id @default(uuid())
+  name   String
+  colors String[]
+  tags   Tag[]
+}
+
+enum TransactionStatus {
+  PENDING
+  COMPLETED
+  FAILED
+}
+
+model Transaction {
+  id              String            @id @default(uuid())
+  project         Project           @relation(fields: [projectId], references: [id])
+  projectId       String
+  amount          Decimal           @db.Decimal(20, 8)
+  token           Token             @relation(fields: [tokenAddress], references: [address])
+  tokenAddress    String
+  status          TransactionStatus
+  fromAddress     String
+  toAddress       String
+  transactionHash String            @unique
+  blockNumber     Int?
+  timestamp       DateTime
+}
+
+model ContractEvent {
+  id              String   @id @default(uuid())
+  contractAddress String
+  eventName       String
+  parameters      Json
+  transactionHash String
+  blockNumber     Int
+  timestamp       DateTime
+}
+
+model Review {
+  id         String   @id @default(uuid())
+  project    Project  @relation(fields: [projectId], references: [id])
+  projectId  String
+  reviewer   User     @relation(fields: [reviewerId], references: [id])
+  reviewerId String
+  rating     Int
+  comment    String
+  createdAt  DateTime @default(now())
+}
+
+enum NotificationType {
+  PROJECT_UPDATE
+  DESIGN_FEEDBACK
+  MESSAGE
+  DEADLINE_REMINDER
+  PAYMENT_RECEIVED
+  DESIGN_MINTED
+}
+
+model Notification {
+  id        String           @id @default(uuid())
+  user      User             @relation(fields: [userId], references: [id])
+  userId    String
+  type      NotificationType
+  content   String
+  relatedId String?
+  read      Boolean          @default(false)
+  createdAt DateTime         @default(now())
+}
+
+model Token {
+  address      String        @id
+  symbol       String
+  name         String
+  decimals     Int
+  transactions Transaction[]
+}

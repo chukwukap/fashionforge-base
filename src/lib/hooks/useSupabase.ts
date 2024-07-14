@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { usePrivy } from "@privy-io/react-auth";
-import { createClientComponent } from "@/lib/supabase";
+import { createClientComponent } from "@/lib/prisma";
 
 interface SupabaseUser {
   id: string;
