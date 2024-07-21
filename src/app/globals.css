@@ -4,89 +4,74 @@
 
 @layer base {
   :root {
-    --background: 240 100% 99%; /* Blockchain White */
-    --foreground: 220 100% 31%; /* Quantum Blue */
+    --background: 30 20% 95%; /* Soft Cream */
+    --foreground: 220 60% 20%; /* Deep Navy */
 
     --card: 0 0% 100%;
-    --card-foreground: 220 100% 31%; /* Quantum Blue */
+    --card-foreground: 220 60% 20%; /* Deep Navy */
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 100% 31%; /* Quantum Blue */
+    --popover-foreground: 220 60% 20%; /* Deep Navy */
 
-    --primary: 220 100% 31%; /* Quantum Blue */
-    --primary-foreground: 240 100% 99%; /* Blockchain White */
+    --primary: 220 60% 50%; /* CoreDAO Blue */
+    --primary-foreground: 30 20% 95%; /* Soft Cream */
 
-    --secondary: 348 85% 44%; /* Couture Crimson */
-    --secondary-foreground: 240 100% 99%; /* Blockchain White */
+    --secondary: 340 80% 55%; /* Fashion Pink */
+    --secondary-foreground: 30 20% 95%; /* Soft Cream */
 
-    --muted: 0 0% 50%; /* Neutral Gray */
-    --muted-foreground: 220 100% 31%; /* Quantum Blue */
+    --muted: 220 14% 85%; /* Subtle Gray */
+    --muted-foreground: 220 60% 20%; /* Deep Navy */
 
-    --accent: 45 100% 50%; /* Digital Gold */
-    --accent-foreground: 220 100% 31%; /* Quantum Blue */
+    --accent: 45 100% 50%; /* Bitcoin Gold */
+    --accent-foreground: 220 60% 20%; /* Deep Navy */
 
-    --destructive: 348 85% 44%; /* Couture Crimson */
-    --destructive-foreground: 240 100% 99%; /* Blockchain White */
+    --destructive: 0 85% 60%; /* Crimson Red */
+    --destructive-foreground: 30 20% 95%; /* Soft Cream */
 
-    --border: 0 0% 50%; /* Neutral Gray */
-    --input: 0 0% 50%; /* Neutral Gray */
-    --ring: 45 100% 50%; /* Digital Gold */
+    --border: 220 14% 75%; /* Light Gray */
+    --input: 220 14% 75%; /* Light Gray */
+    --ring: 45 100% 50%; /* Bitcoin Gold */
 
     --radius: 0.5rem;
   }
 
   .dark {
-    --background: 220 100% 31%; /* Quantum Blue */
-    --foreground: 240 100% 99%; /* Blockchain White */
+    --background: 220 60% 20%; /* Deep Navy */
+    --foreground: 30 20% 95%; /* Soft Cream */
 
-    --card: 220 100% 25%; /* Darker Quantum Blue */
-    --card-foreground: 240 100% 99%; /* Blockchain White */
+    --card: 220 60% 15%; /* Darker Navy */
+    --card-foreground: 30 20% 95%; /* Soft Cream */
 
-    --popover: 220 100% 25%; /* Darker Quantum Blue */
-    --popover-foreground: 240 100% 99%; /* Blockchain White */
+    --popover: 220 60% 15%; /* Darker Navy */
+    --popover-foreground: 30 20% 95%; /* Soft Cream */
 
-    --primary: 45 100% 50%; /* Digital Gold */
-    --primary-foreground: 220 100% 31%; /* Quantum Blue */
+    --primary: 45 100% 50%; /* Bitcoin Gold */
+    --primary-foreground: 220 60% 20%; /* Deep Navy */
 
-    --secondary: 348 85% 44%; /* Couture Crimson */
-    --secondary-foreground: 240 100% 99%; /* Blockchain White */
+    --secondary: 340 80% 55%; /* Fashion Pink */
+    --secondary-foreground: 30 20% 95%; /* Soft Cream */
 
-    --muted: 0 0% 50%; /* Neutral Gray */
-    --muted-foreground: 240 100% 99%; /* Blockchain White */
+    --muted: 220 14% 40%; /* Dark Gray */
+    --muted-foreground: 30 20% 95%; /* Soft Cream */
 
-    --accent: 157 100% 33%; /* Eco Green */
-    --accent-foreground: 240 100% 99%; /* Blockchain White */
+    --accent: 220 60% 50%; /* CoreDAO Blue */
+    --accent-foreground: 30 20% 95%; /* Soft Cream */
 
-    --destructive: 348 85% 44%; /* Couture Crimson */
-    --destructive-foreground: 240 100% 99%; /* Blockchain White */
+    --destructive: 0 85% 60%; /* Crimson Red */
+    --destructive-foreground: 30 20% 95%; /* Soft Cream */
 
-    --border: 0 0% 50%; /* Neutral Gray */
-    --input: 0 0% 50%; /* Neutral Gray */
-    --ring: 45 100% 50%; /* Digital Gold */
+    --border: 220 14% 40%; /* Dark Gray */
+    --input: 220 14% 40%; /* Dark Gray */
+    --ring: 45 100% 50%; /* Bitcoin Gold */
   }
 }
+
 @layer base {
   * {
     @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
-    /* cursor: none; */
-  }
-
-  a,
-  button,
-  [role="button"] {
-    /* cursor: none; */
-  }
-
-  .fashion-cursor {
-    pointer-events: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 9999;
-    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.7));
   }
 
   .bg-pattern {
@@ -96,23 +81,3 @@
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   }
 }
-
-/* a,
-button,
-[role="button"] {
-  cursor: none;
-} */
-
-/* .fashion-cursor {
-  pointer-events: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 9999;
-  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.7));
-}
-
-.slick-prev,
-.slick-next {
-  display: none !important;
-} */
