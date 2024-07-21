@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { motion } from "framer-motion";
 
 import { Inter } from "next/font/google";
 
@@ -19,14 +18,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <div className="flex flex-col min-h-screen">
-          <Header />
-          <main className="flex-grow">{children}</main>
-          <Footer />
-        </div>
-      </body>
-    </html>
+    <div className="flex flex-col min-h-screen">
+      <Header />
+      <div className="flex-grow">{children}</div>
+      <Footer />
+    </div>
   );
 }

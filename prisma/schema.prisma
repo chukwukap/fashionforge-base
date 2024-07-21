@@ -26,17 +26,16 @@ enum UserStatus {
 }
 
 model User {
-  id            String     @id @default(uuid())
-  privyId       String     @unique
-  email         String     @unique
-  name          String
-  avatar        String?
-  walletAddress String?    @unique
-  createdAt     DateTime   @default(now())
-  updatedAt     DateTime   @updatedAt
-  status        UserStatus
-  role          UserRole
-
+  id                 String                    @id @default(uuid())
+  privyId            String                    @unique
+  email              String                    @unique
+  name               String
+  walletAddress      String?                   @unique
+  createdAt          DateTime                  @default(now())
+  updatedAt          DateTime                  @updatedAt
+  status             UserStatus
+  role               UserRole
+  profileImage       String?
   clientProfile      ClientProfile?
   designerProfile    DesignerProfile?
   adminProfile       AdminProfile?
@@ -158,6 +157,7 @@ model Design {
   tokenId      String?         @unique
   project      Project?        @relation(fields: [projectId], references: [id])
   projectId    String?
+  imageUrl     String
 }
 
 model Variation {

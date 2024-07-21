@@ -1,45 +1,18 @@
 import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
-
-export async function GET() {
-  const users = await prisma.user.findMany();
-  return NextResponse.json(users);
-}
+import prisma from "@/lib/prisma";
 
 export async function POST(request: Request) {
-  const data = await request.json();
-  const user = await prisma.user.create({ data });
-  return NextResponse.json(user);
+  try {
+    const userData = await request.json();
+    const newUser = await prisma.user.create({
+      data: userData,
+    });
+    return NextResponse.json(newUser, { status: 201 });
+  } catch (error) {
+    console.error("Error creating user:", error);
+    return NextResponse.json(
+      { error: "Failed to create user" },
+      { status: 500 }
+    );
+  }
 }
-
-// import React, { useEffect } from 'react';
-// import { useUser } from '@/hooks/useUser';
-// import { User } from '@prisma/client';
-
-// interface UserListProps {
-//   initialUsers: User[];
-// }
-
-// export const UserList: React.FC<UserListProps> = ({ initialUsers }) => {
-//   const { users, setUsers, loading, error } = useUser();
-
-//   useEffect(() => {
-//     setUsers(initialUsers);
-//   }, [initialUsers, setUsers]);
-
-//   if (loading) return <div>Loading users...</div>;
-//   if (error) return <div>Error: {error}</div>;
-
-//   return (
-//     <div>
-//       <h1>Users</h1>
-//       <ul>
-//         {users.map((user) => (
-//           <li key={user.id}>{user.name}</li>
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// };

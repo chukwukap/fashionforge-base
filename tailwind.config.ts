@@ -77,9 +77,18 @@ const config = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      gradientColorStops: (theme) => ({
+        "pink-400": "#F472B6",
+        "purple-600": "#7C3AED",
+      }),
     },
   },
-  plugins: [require("tailwindcss-animate"), require("tailwind-scrollbar")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require("tailwind-scrollbar"),
+    require("@tailwindcss/forms"),
+    require("tailwindcss-gradients"),
+  ],
 } satisfies Config;
 
 export default config;

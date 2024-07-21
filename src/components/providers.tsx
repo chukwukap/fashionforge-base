@@ -34,6 +34,7 @@ const privyConfig: PrivyClientConfig = {
   supportedChains: [mainnet, sepolia, coreDao],
   appearance: {
     showWalletLoginFirst: true,
+    theme: "light",
   },
 };
 

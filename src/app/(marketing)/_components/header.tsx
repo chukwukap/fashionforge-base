@@ -13,10 +13,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useUserStore } from "@/lib/store/useUserStore";
 import Image from "next/image";
-import { useLogin, usePrivy } from "@privy-io/react-auth";
-import { useUser } from "@/lib/hooks/useUser";
+import { useLogin, useLogout, usePrivy } from "@privy-io/react-auth";
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -24,8 +22,37 @@ const Header: React.FC = () => {
   const router = useRouter();
   const pathName = usePathname();
 
-  const { user, loading } = useUser();
-  const { login, logout } = usePrivy();
+  const { user } = usePrivy();
+  const { login: loginUser } = useLogin({
+    onComplete: (
+      user,
+      isNewUser,
+      wasAlreadyAuthenticated,
+      loginMethod,
+      linkedAccount
+    ) => {
+      if (isNewUser) {
+        router.push("/onboarding");
+      } else {
+        router.push("/dashboard");
+      }
+
+      console.log(
+        user,
+        isNewUser,
+        wasAlreadyAuthenticated,
+        loginMethod,
+        linkedAccount
+      );
+      // Any logic you'd like to execute if the user is/becomes authenticated while this
+      // component is mounted
+    },
+    onError: (error) => {
+      console.error("Login failed", error);
+      // Show an error message to the user
+    },
+  });
+  const { logout: logoutUser } = useLogout();
 
   const navItems = [
     { name: "Home", href: "/" },
@@ -118,7 +145,7 @@ const Header: React.FC = () => {
                       <span className="sr-only">Open user menu</span>
                       <Image
                         className="h-8 w-8 rounded-full object-cover"
-                        src={user?.avatar || "https://via.placeholder.com/40"}
+                        src={"/logo.svg"}
                         alt=""
                         width={40}
                         height={40}
@@ -143,14 +170,14 @@ const Header: React.FC = () => {
                       Settings
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem onSelect={logout}>
+                    <DropdownMenuItem onSelect={logoutUser}>
                       Sign out
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
               ) : (
                 <Button
-                  onClick={login}
+                  onClick={loginUser}
                   className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-2 px-4 rounded-full transition-colors duration-200"
                 >
                   Sign in
@@ -233,7 +260,7 @@ const Header: React.FC = () => {
                         Settings
                       </Link>
                       <button
-                        onClick={logout}
+                        onClick={logoutUser}
                         className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-foreground hover:text-primary hover:bg-primary/10"
                       >
                         Sign out
@@ -241,7 +268,7 @@ const Header: React.FC = () => {
                     </>
                   ) : (
                     <button
-                      onClick={login}
+                      onClick={loginUser}
                       className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-primary hover:text-primary/90 hover:bg-primary/10"
                     >
                       Sign in

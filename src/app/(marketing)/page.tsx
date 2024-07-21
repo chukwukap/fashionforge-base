@@ -11,7 +11,7 @@ import { TestimonialsAndCTA } from "../_components/testimonial";
 
 export default function Home() {
   return (
-    <div>
+    <main>
       <HeroSection />
       <FeaturesSection />
       <HowItWorks />
@@ -21,6 +21,6 @@ export default function Home() {
       <CTASection />
       <MarketplacePreview />
       <TestimonialsAndCTA />
-    </div>
+    </main>
   );
 }

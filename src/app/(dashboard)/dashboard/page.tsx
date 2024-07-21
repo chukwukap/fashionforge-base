@@ -40,7 +40,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
-import Sidebar from "./_components/side-bar";
+import { CollapsibleSidebar } from "./_components/side-bar";
 import { RecentDesigns } from "./_components/recent-designs";
 import UpcomingDeadlines from "./_components/upcoming-deadline";
 import { StatCard } from "./_components/stat-card";
@@ -62,74 +62,8 @@ const navItems = [
 
 export default function DesignerDashboard() {
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-purple-50 via-pink-50 to-amber-50">
-      <div className="absolute inset-0 bg-pattern opacity-5"></div>
-      <Sidebar />
-      <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
-        <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-white/50 backdrop-blur-sm px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="outline" size="icon" className="sm:hidden">
-                <PanelLeft className="h-5 w-5" />
-                <span className="sr-only">Toggle Menu</span>
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="left" className="w-[300px] sm:w-[400px]">
-              <nav className="grid gap-6 text-lg font-medium">
-                <Link
-                  href="/designer/dashboard"
-                  className="flex items-center gap-2 text-purple-600"
-                >
-                  <Package2 className="h-6 w-6" />
-                  <span>FashionForge</span>
-                </Link>
-                {navItems.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className="flex items-center gap-2 text-gray-600 hover:text-purple-600"
-                  >
-                    <item.icon className="h-5 w-5" />
-                    <span>{item.name}</span>
-                  </Link>
-                ))}
-              </nav>
-            </SheetContent>
-          </Sheet>
-          <div className="relative ml-auto flex-1 md:grow-0">
-            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-500" />
-            <Input
-              type="search"
-              placeholder="Search..."
-              className="w-full rounded-lg bg-white pl-8 md:w-[200px] lg:w-[336px]"
-            />
-          </div>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant="outline"
-                size="icon"
-                className="h-8 w-8 rounded-full"
-              >
-                <Image
-                  src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-                  width={32}
-                  height={32}
-                  alt="Avatar"
-                  className="rounded-full"
-                />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Settings</DropdownMenuItem>
-              <DropdownMenuItem>Support</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </header>
+    <div className="min-h-screen w-full ">
+      <div className="">
         <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

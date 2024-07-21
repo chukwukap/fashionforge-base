@@ -302,3 +302,12 @@ function mapPrivyUserToAppUser(privyUser: PrivyUser, role: UserRole): User {
       return { ...baseUser, role, permissions: [] };
   }
 }
+
+export interface Event {
+  id: string;
+  title: string;
+  start: Date;
+  end: Date;
+  description: string;
+  type: "default" | "deadline" | "meeting" | "personal";
+}
