@@ -19,11 +19,11 @@ const config = {
     },
     extend: {
       colors: {
-        "ff-primary": "#2C3E50", // Deep blue-gray
-        "ff-secondary": "#34495E", // Lighter blue-gray
-        "ff-accent": "#E74C3C", // Vibrant red
-        "ff-light": "#ECF0F1", // Off-white
-        "ff-dark": "#1A1A1A", // Near-black
+        "ff-primary": "#2962FF", // CoreDAO Blue
+        "ff-secondary": "#F59E0B", // Amber-500
+        "ff-accent": "#F9A8D4", // Pink-300
+        "ff-light": "#FEF3C7", // Cream background
+        "ff-dark": "#292524", // Stone-800
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

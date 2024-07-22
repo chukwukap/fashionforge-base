@@ -4,65 +4,65 @@
 
 @layer base {
   :root {
-    --background: 30 20% 95%; /* Soft Cream */
-    --foreground: 220 60% 20%; /* Deep Navy */
+    --background: 43 96% 98%; /* Cream #FEF3C7 */
+    --foreground: 20 14% 4%; /* Stone-800 #292524 */
 
-    --card: 0 0% 100%;
-    --card-foreground: 220 60% 20%; /* Deep Navy */
+    --card: 0 0% 100%; /* White */
+    --card-foreground: 20 14% 4%; /* Stone-800 #292524 */
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 220 60% 20%; /* Deep Navy */
+    --popover: 0 0% 100%; /* White */
+    --popover-foreground: 20 14% 4%; /* Stone-800 #292524 */
 
-    --primary: 220 60% 50%; /* CoreDAO Blue */
-    --primary-foreground: 30 20% 95%; /* Soft Cream */
+    --primary: 38 92% 50%; /* Amber-500 #F59E0B */
+    --primary-foreground: 43 96% 98%; /* Cream #FEF3C7 */
 
-    --secondary: 340 80% 55%; /* Fashion Pink */
-    --secondary-foreground: 30 20% 95%; /* Soft Cream */
+    --secondary: 330 81% 60%; /* Pink-300 #F9A8D4 */
+    --secondary-foreground: 43 96% 98%; /* Cream #FEF3C7 */
 
-    --muted: 220 14% 85%; /* Subtle Gray */
-    --muted-foreground: 220 60% 20%; /* Deep Navy */
+    --muted: 20 6% 90%; /* Stone-200 */
+    --muted-foreground: 25 5% 45%; /* Stone-600 #57534E */
 
-    --accent: 45 100% 50%; /* Bitcoin Gold */
-    --accent-foreground: 220 60% 20%; /* Deep Navy */
+    --accent: 38 92% 50%; /* Amber-500 #F59E0B */
+    --accent-foreground: 20 14% 4%; /* Stone-800 #292524 */
 
-    --destructive: 0 85% 60%; /* Crimson Red */
-    --destructive-foreground: 30 20% 95%; /* Soft Cream */
+    --destructive: 0 84% 60%; /* Red-500 */
+    --destructive-foreground: 43 96% 98%; /* Cream #FEF3C7 */
 
-    --border: 220 14% 75%; /* Light Gray */
-    --input: 220 14% 75%; /* Light Gray */
-    --ring: 45 100% 50%; /* Bitcoin Gold */
+    --border: 20 5% 90%; /* Stone-200 */
+    --input: 20 5% 90%; /* Stone-200 */
+    --ring: 38 92% 50%; /* Amber-500 #F59E0B */
 
     --radius: 0.5rem;
   }
 
   .dark {
-    --background: 220 60% 20%; /* Deep Navy */
-    --foreground: 30 20% 95%; /* Soft Cream */
+    --background: 20 14% 4%; /* Stone-800 #292524 */
+    --foreground: 43 96% 98%; /* Cream #FEF3C7 */
 
-    --card: 220 60% 15%; /* Darker Navy */
-    --card-foreground: 30 20% 95%; /* Soft Cream */
+    --card: 24 9% 10%; /* Stone-900 */
+    --card-foreground: 43 96% 98%; /* Cream #FEF3C7 */
 
-    --popover: 220 60% 15%; /* Darker Navy */
-    --popover-foreground: 30 20% 95%; /* Soft Cream */
+    --popover: 24 9% 10%; /* Stone-900 */
+    --popover-foreground: 43 96% 98%; /* Cream #FEF3C7 */
 
-    --primary: 45 100% 50%; /* Bitcoin Gold */
-    --primary-foreground: 220 60% 20%; /* Deep Navy */
+    --primary: 38 92% 50%; /* Amber-500 #F59E0B */
+    --primary-foreground: 20 14% 4%; /* Stone-800 #292524 */
 
-    --secondary: 340 80% 55%; /* Fashion Pink */
-    --secondary-foreground: 30 20% 95%; /* Soft Cream */
+    --secondary: 330 81% 60%; /* Pink-300 #F9A8D4 */
+    --secondary-foreground: 43 96% 98%; /* Cream #FEF3C7 */
 
-    --muted: 220 14% 40%; /* Dark Gray */
-    --muted-foreground: 30 20% 95%; /* Soft Cream */
+    --muted: 20 6% 20%; /* Stone-800 */
+    --muted-foreground: 43 96% 98%; /* Cream #FEF3C7 */
 
-    --accent: 220 60% 50%; /* CoreDAO Blue */
-    --accent-foreground: 30 20% 95%; /* Soft Cream */
+    --accent: 38 92% 50%; /* Amber-500 #F59E0B */
+    --accent-foreground: 43 96% 98%; /* Cream #FEF3C7 */
 
-    --destructive: 0 85% 60%; /* Crimson Red */
-    --destructive-foreground: 30 20% 95%; /* Soft Cream */
+    --destructive: 0 84% 60%; /* Red-500 */
+    --destructive-foreground: 43 96% 98%; /* Cream #FEF3C7 */
 
-    --border: 220 14% 40%; /* Dark Gray */
-    --input: 220 14% 40%; /* Dark Gray */
-    --ring: 45 100% 50%; /* Bitcoin Gold */
+    --border: 20 6% 20%; /* Stone-800 */
+    --input: 20 6% 20%; /* Stone-800 */
+    --ring: 38 92% 50%; /* Amber-500 #F59E0B */
   }
 }
 
@@ -75,7 +75,8 @@
   }
 
   .bg-pattern {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.1'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    background-color: #fef3c7;
   }
   .shadow-text {
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
