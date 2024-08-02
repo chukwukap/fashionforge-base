@@ -1,4 +1,4 @@
-import { useRootStore } from "../store/useRootStore";
+import { useRootStore } from "../stores/useRootStore";
 
 export const useMessage = () => {
   const { messageStore } = useRootStore();

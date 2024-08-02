@@ -34,11 +34,11 @@ export const OrdersTable: React.FC<OrdersTableProps> = ({
     switch (status) {
       case "pending":
         return "bg-yellow-100 text-yellow-800";
-      case "in_production":
+      case "in_progress":
         return "bg-blue-100 text-blue-800";
-      case "quality_check":
+      case "revision":
         return "bg-purple-100 text-purple-800";
-      case "shipped":
+      case "completed":
         return "bg-green-100 text-green-800";
       case "delivered":
         return "bg-gray-100 text-gray-800";
@@ -99,19 +99,19 @@ export const OrdersTable: React.FC<OrdersTableProps> = ({
                     Pending
                   </DropdownMenuItem>
                   <DropdownMenuItem
-                    onClick={() => onUpdateStatus(order.id, "in_production")}
+                    onClick={() => onUpdateStatus(order.id, "in_progress")}
                   >
-                    In Production
+                    In Progress
                   </DropdownMenuItem>
                   <DropdownMenuItem
-                    onClick={() => onUpdateStatus(order.id, "quality_check")}
+                    onClick={() => onUpdateStatus(order.id, "revision")}
                   >
-                    Quality Check
+                    Revision
                   </DropdownMenuItem>
                   <DropdownMenuItem
-                    onClick={() => onUpdateStatus(order.id, "shipped")}
+                    onClick={() => onUpdateStatus(order.id, "completed")}
                   >
-                    Shipped
+                    Completed
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     onClick={() => onUpdateStatus(order.id, "delivered")}

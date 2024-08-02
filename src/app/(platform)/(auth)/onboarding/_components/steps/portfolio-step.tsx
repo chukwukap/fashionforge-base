@@ -1,19 +1,28 @@
 import React, { useState } from "react";
-import { useFormContext } from "react-hook-form";
+import { useFormContext, FieldErrors } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Plus, X } from "lucide-react";
 
+interface PortfolioItem {
+  title: string;
+  description: string;
+  imageUrl: string;
+}
+
+interface FormValues {
+  portfolioItems: PortfolioItem[];
+}
+
 const PortfolioStep: React.FC = () => {
   const {
     register,
     formState: { errors },
-    watch,
     setValue,
-  } = useFormContext();
-  const [portfolioItems, setPortfolioItems] = useState([
+  } = useFormContext<FormValues>();
+  const [portfolioItems, setPortfolioItems] = useState<PortfolioItem[]>([
     { title: "", description: "", imageUrl: "" },
   ]);
 
@@ -61,9 +70,9 @@ const PortfolioStep: React.FC = () => {
               })}
               placeholder="Enter project title"
             />
-            {errors.portfolioItems?.[index as number]?.title && (
+            {errors.portfolioItems && errors.portfolioItems[index]?.title && (
               <p className="text-red-500 text-sm mt-1">
-                {errors.portfolioItems[index].title.message as string}
+                {errors.portfolioItems[index]?.title?.message}
               </p>
             )}
           </div>
@@ -77,11 +86,12 @@ const PortfolioStep: React.FC = () => {
               placeholder="Describe your project"
               rows={3}
             />
-            {errors.portfolioItems?.[index]?.description && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.portfolioItems[index].description.message as string}
-              </p>
-            )}
+            {errors.portfolioItems &&
+              errors.portfolioItems[index]?.description && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.portfolioItems[index]?.description?.message}
+                </p>
+              )}
           </div>
           <div>
             <Label htmlFor={`imageUrl-${index}`}>Image URL</Label>
@@ -93,11 +103,12 @@ const PortfolioStep: React.FC = () => {
               })}
               placeholder="Enter image URL"
             />
-            {errors.portfolioItems?.[index]?.imageUrl && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.portfolioItems[index].imageUrl.message as string}
-              </p>
-            )}
+            {errors.portfolioItems &&
+              errors.portfolioItems[index]?.imageUrl && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.portfolioItems[index]?.imageUrl?.message}
+                </p>
+              )}
           </div>
         </div>
       ))}

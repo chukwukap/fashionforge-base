@@ -19,7 +19,7 @@ const MarketPage: React.FC = () => {
     error,
   } = useQuery({
     queryKey: ["designs", searchTerm, status, sortBy],
-    queryFn: () => designService.fetchDesigns({ searchTerm, status, sortBy }),
+    queryFn: () => designService.fetchDesigns(),
   });
 
   if (isLoading) {

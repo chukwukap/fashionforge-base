@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Design } from "@/lib/types";
-import ethers from "ethers";
+import * as ethers from "ethers";
 
 interface AddDesignModalProps {
   isOpen: boolean;
