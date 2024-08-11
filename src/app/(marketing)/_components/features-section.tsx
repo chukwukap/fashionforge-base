@@ -1,180 +1,200 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { SectionHeading } from "@/components/common/section-heading";
-import { SectionIntro } from "@/components/common/section-intro";
+"use client";
 
-const features = [
-  {
-    title: "Blockchain Authentication",
-    description:
-      "Verify the authenticity and ownership of every design with immutable blockchain records",
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-12 w-12"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-        />
-      </svg>
-    ),
-  },
-  {
-    title: "Global Marketplace",
-    description:
-      "Showcase and sell your designs to fashion enthusiasts worldwide, breaking geographical barriers",
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-12 w-12"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-        />
-      </svg>
-    ),
-  },
-  {
-    title: "Smart Royalties",
-    description:
-      "Automatically receive royalties for every sale and resale of your designs through smart contracts",
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-12 w-12"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-        />
-      </svg>
-    ),
-  },
-  {
-    title: "Sustainable Tracking",
-    description:
-      "Track and verify the sustainability of materials and processes, appealing to eco-conscious consumers",
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-12 w-12"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-        />
-      </svg>
-    ),
-  },
-  {
-    title: "Limited Edition Drops",
-    description:
-      "Create and manage exclusive, limited-edition design releases with blockchain-verified scarcity",
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-12 w-12"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-        />
-      </svg>
-    ),
-  },
-  {
-    title: "Collaborative Design",
-    description:
-      "Securely collaborate with other designers, with clear ownership and contribution tracking",
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-12 w-12"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-        />
-      </svg>
-    ),
-  },
-];
+import React, { useRef } from "react";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useSpring,
+  useInView,
+} from "framer-motion";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import {
+  PaintBrushIcon,
+  ShoppingBagIcon,
+  CubeIcon,
+  ShieldCheckIcon,
+  CurrencyDollarIcon,
+  GlobeAltIcon,
+  UserGroupIcon,
+  SparklesIcon,
+  ScissorsIcon,
+  CameraIcon,
+  SwatchIcon,
+  GiftIcon,
+} from "@heroicons/react/24/outline";
+
 const FeatureCard: React.FC<{
-  feature: (typeof features)[0];
-  index: number;
-}> = ({ feature, index }) => (
-  <motion.div
-    className="bg-white/80 backdrop-blur-sm rounded-lg shadow-xl p-8 flex flex-col items-center text-center transform hover:scale-105 transition-all duration-300"
-    initial={{ opacity: 0, y: 50 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5, delay: index * 0.1 }}
-  >
-    <div className="text-amber-500 mb-6 transform hover:rotate-12 transition-all duration-300">
-      {feature.icon}
-    </div>
-    <h3 className="text-2xl font-bold mb-4 text-stone-800">{feature.title}</h3>
-    <p className="text-stone-600">{feature.description}</p>
-  </motion.div>
-);
+  icon: React.ElementType;
+  title: string;
+  description: string;
+  image: string;
+}> = ({ icon: Icon, title, description, image }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
+  return (
+    <motion.div
+      ref={ref}
+      className="bg-card text-card-foreground rounded-lg p-6 shadow-lg"
+      initial={{ opacity: 0, y: 50 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+      transition={{ duration: 0.5 }}
+    >
+      <div className="flex items-center mb-4">
+        <Icon className="w-8 h-8 text-primary mr-3" />
+        <h3 className="text-xl font-bold">{title}</h3>
+      </div>
+      <p className="mb-4">{description}</p>
+      <div className="h-48 relative rounded-md overflow-hidden">
+        <Image
+          src={image}
+          alt={title}
+          layout="fill"
+          objectFit="cover"
+          className="transition-transform duration-300 hover:scale-110"
+        />
+      </div>
+    </motion.div>
+  );
+};
 
 const FeaturesSection: React.FC = () => {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0]);
+
+  const springConfig = { stiffness: 300, damping: 30, restDelta: 0.001 };
+  const ySpring = useSpring(y, springConfig);
+  const opacitySpring = useSpring(opacity, springConfig);
+
+  const features = [
+    {
+      icon: GiftIcon,
+      title: "Creator Tipping",
+      description:
+        "Receive tips from appreciative clients and fans, providing an additional revenue stream.",
+      image: "/creator-tipping.jpg",
+    },
+    {
+      icon: GlobeAltIcon,
+      title: "Global Marketplace",
+      description:
+        "Showcase and sell your creations and skills to a worldwide audience. Connect with clients from across the globe.",
+      image: "/global-marketplace.jpg",
+    },
+    {
+      icon: PaintBrushIcon,
+      title: "Diverse Design Services",
+      description:
+        "Offer a wide range of services: custom designs, alterations, style consulting, and more.",
+      image: "/design-services.jpg",
+    },
+    {
+      icon: SwatchIcon,
+      title: "Fabric Recommendations",
+      description:
+        "Provide expert fabric suggestions to clients, enhancing the quality of final products.",
+      image: "/fabric-recommendations.jpg",
+    },
+    {
+      icon: ScissorsIcon,
+      title: "Pattern Making",
+      description:
+        "Create and sell digital patterns for both traditional and 3D-printed fashion items.",
+      image: "/pattern-making.jpg",
+    },
+    {
+      icon: CameraIcon,
+      title: "Virtual Fittings",
+      description:
+        "Conduct remote fittings using AR technology, ensuring perfect fits for your clients.",
+      image: "/virtual-fittings.jpg",
+    },
+    {
+      icon: CubeIcon,
+      title: "NFT Fashion Items",
+      description:
+        "Create and sell unique digital fashion pieces as NFTs, tapping into the virtual fashion market.",
+      image: "/nft-fashion.jpg",
+    },
+    {
+      icon: UserGroupIcon,
+      title: "Collaboration Opportunities",
+      description:
+        "Find fellow designers for joint projects or outsource specific tasks within the community.",
+      image: "/collaboration.jpg",
+    },
+    {
+      icon: ShieldCheckIcon,
+      title: "IP Protection",
+      description:
+        "Secure your designs with Base chain technology, ensuring your intellectual property is protected.",
+      image: "/ip-protection.jpg",
+    },
+    {
+      icon: CurrencyDollarIcon,
+      title: "Seamless Transactions",
+      description:
+        "Receive payments for your designs and services with low fees, powered by Base chain.",
+      image: "/seamless-transactions.jpg",
+    },
+
+    {
+      icon: SparklesIcon,
+      title: "Trend Forecasting",
+      description:
+        "Access and contribute to trend reports, helping the community stay ahead of fashion curves.",
+      image: "/trend-forecasting.jpg",
+    },
+    {
+      icon: ShoppingBagIcon,
+      title: "Custom Merchandise",
+      description:
+        "Design and sell custom merchandise, from t-shirts to accessories, expanding your product line.",
+      image: "/custom-merchandise.jpg",
+    },
+  ];
+
   return (
-    <section className="py-24 relative overflow-hidden">
-      {/* Fashion-inspired background */}
-      <div
-        className="absolute inset-0 z-0"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          backgroundColor: "#FEF3C7",
-        }}
-      />
-
-      {/* Decorative elements */}
-      <div className="absolute top-10 left-10 w-20 h-20 border-4 border-amber-300 rounded-full opacity-50" />
-      <div className="absolute bottom-10 right-10 w-32 h-32 border-4 border-pink-300 rounded-full opacity-50" />
-
-      <div className="container mx-auto px-4 relative z-10">
-        <SectionHeading title="Revolutionizing Fashion with Blockchain" />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+    <section
+      className="py-20 relative overflow-hidden bg-gradient-to-br from-background to-secondary/10"
+      ref={containerRef}
+    >
+      <motion.div
+        className="container mx-auto px-4 relative z-10"
+        style={{ y: ySpring, opacity: opacitySpring }}
+      >
+        <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
+          Empower Your Fashion Design Career
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map((feature, index) => (
-            <FeatureCard key={feature.title} feature={feature} index={index} />
+            <FeatureCard key={index} {...feature} />
           ))}
         </div>
-        <SectionIntro text="FashionForge is the first blockchain-powered fashion platform, offering a secure and transparent design process, authenticity, and new revenue opportunities." />
-      </div>
+        <motion.div
+          className="mt-16 text-center"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.5 }}
+        >
+          <Button
+            size="lg"
+            className="rounded-full text-lg px-8 py-4 bg-primary text-primary-foreground hover:bg-primary/90"
+          >
+            Join FashionForge Today
+          </Button>
+        </motion.div>
+      </motion.div>
     </section>
   );
 };
-export { FeaturesSection };
+
+export default FeaturesSection;

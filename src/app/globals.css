@@ -4,65 +4,66 @@
 
 @layer base {
   :root {
-    --background: 43 96% 98%; /* Cream #FEF3C7 */
-    --foreground: 20 14% 4%; /* Stone-800 #292524 */
+    --background: 220 26% 14%; /* Dark Blue #1e2a47 */
+    --foreground: 210 40% 98%; /* Light Gray #F8FAFC */
 
-    --card: 0 0% 100%; /* White */
-    --card-foreground: 20 14% 4%; /* Stone-800 #292524 */
+    --card: 217 33% 17%; /* Darker Blue #1E293B */
+    --card-foreground: 210 40% 98%; /* Light Gray #F8FAFC */
 
-    --popover: 0 0% 100%; /* White */
-    --popover-foreground: 20 14% 4%; /* Stone-800 #292524 */
+    --popover: 217 33% 17%; /* Darker Blue #1E293B */
+    --popover-foreground: 210 40% 98%; /* Light Gray #F8FAFC */
 
-    --primary: 38 92% 50%; /* Amber-500 #F59E0B */
-    --primary-foreground: 43 96% 98%; /* Cream #FEF3C7 */
+    --primary: 221 83% 53%; /* Base Blue #3B82F6 */
+    --primary-foreground: 210 40% 98%; /* Light Gray #F8FAFC */
 
-    --secondary: 330 81% 60%; /* Pink-300 #F9A8D4 */
-    --secondary-foreground: 43 96% 98%; /* Cream #FEF3C7 */
+    --secondary: 262 83% 58%; /* Purple #7C3AED */
+    --secondary-foreground: 210 40% 98%; /* Light Gray #F8FAFC */
 
-    --muted: 20 6% 90%; /* Stone-200 */
-    --muted-foreground: 25 5% 45%; /* Stone-600 #57534E */
+    --muted: 217 33% 17%; /* Darker Blue #1E293B */
+    --muted-foreground: 215 20% 65%; /* Light Blue-Gray #94A3B8 */
 
-    --accent: 38 92% 50%; /* Amber-500 #F59E0B */
-    --accent-foreground: 20 14% 4%; /* Stone-800 #292524 */
+    --accent: 262 83% 58%; /* Purple #7C3AED */
+    --accent-foreground: 210 40% 98%; /* Light Gray #F8FAFC */
 
     --destructive: 0 84% 60%; /* Red-500 */
-    --destructive-foreground: 43 96% 98%; /* Cream #FEF3C7 */
+    --destructive-foreground: 210 40% 98%; /* Light Gray #F8FAFC */
 
-    --border: 20 5% 90%; /* Stone-200 */
-    --input: 20 5% 90%; /* Stone-200 */
-    --ring: 38 92% 50%; /* Amber-500 #F59E0B */
+    --border: 217 33% 17%; /* Darker Blue #1E293B */
+    --input: 217 33% 17%; /* Darker Blue #1E293B */
+    --ring: 221 83% 53%; /* Base Blue #3B82F6 */
 
     --radius: 0.5rem;
   }
 
   .dark {
-    --background: 20 14% 4%; /* Stone-800 #292524 */
-    --foreground: 43 96% 98%; /* Cream #FEF3C7 */
+    /* Dark mode colors are now the default */
+    --background: 220 26% 14%; /* Dark Blue #1e2a47 */
+    --foreground: 210 40% 98%; /* Light Gray #F8FAFC */
 
-    --card: 24 9% 10%; /* Stone-900 */
-    --card-foreground: 43 96% 98%; /* Cream #FEF3C7 */
+    --card: 217 33% 17%; /* Darker Blue #1E293B */
+    --card-foreground: 210 40% 98%; /* Light Gray #F8FAFC */
 
-    --popover: 24 9% 10%; /* Stone-900 */
-    --popover-foreground: 43 96% 98%; /* Cream #FEF3C7 */
+    --popover: 217 33% 17%; /* Darker Blue #1E293B */
+    --popover-foreground: 210 40% 98%; /* Light Gray #F8FAFC */
 
-    --primary: 38 92% 50%; /* Amber-500 #F59E0B */
-    --primary-foreground: 20 14% 4%; /* Stone-800 #292524 */
+    --primary: 221 83% 53%; /* Base Blue #3B82F6 */
+    --primary-foreground: 210 40% 98%; /* Light Gray #F8FAFC */
 
-    --secondary: 330 81% 60%; /* Pink-300 #F9A8D4 */
-    --secondary-foreground: 43 96% 98%; /* Cream #FEF3C7 */
+    --secondary: 262 83% 58%; /* Purple #7C3AED */
+    --secondary-foreground: 210 40% 98%; /* Light Gray #F8FAFC */
 
-    --muted: 20 6% 20%; /* Stone-800 */
-    --muted-foreground: 43 96% 98%; /* Cream #FEF3C7 */
+    --muted: 217 33% 17%; /* Darker Blue #1E293B */
+    --muted-foreground: 215 20% 65%; /* Light Blue-Gray #94A3B8 */
 
-    --accent: 38 92% 50%; /* Amber-500 #F59E0B */
-    --accent-foreground: 43 96% 98%; /* Cream #FEF3C7 */
+    --accent: 262 83% 58%; /* Purple #7C3AED */
+    --accent-foreground: 210 40% 98%; /* Light Gray #F8FAFC */
 
     --destructive: 0 84% 60%; /* Red-500 */
-    --destructive-foreground: 43 96% 98%; /* Cream #FEF3C7 */
+    --destructive-foreground: 210 40% 98%; /* Light Gray #F8FAFC */
 
-    --border: 20 6% 20%; /* Stone-800 */
-    --input: 20 6% 20%; /* Stone-800 */
-    --ring: 38 92% 50%; /* Amber-500 #F59E0B */
+    --border: 217 33% 17%; /* Darker Blue #1E293B */
+    --input: 217 33% 17%; /* Darker Blue #1E293B */
+    --ring: 221 83% 53%; /* Base Blue #3B82F6 */
   }
 }
 
@@ -75,10 +76,53 @@
   }
 
   .bg-pattern {
-    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    background-color: #fef3c7;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%233B82F6' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    background-color: #1e2a47; /* Updated to match the new background color */
   }
   .shadow-text {
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    text-shadow: 0 1px 2px rgba(15, 23, 42, 0.2);
   }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.fashion-grid {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  background-image: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.1) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+  transform: perspective(500px) rotateX(60deg);
+  animation: moveGrid 20s linear infinite;
+}
+
+@keyframes moveGrid {
+  0% {
+    transform: perspective(500px) rotateX(60deg) translateY(0);
+  }
+  100% {
+    transform: perspective(500px) rotateX(60deg) translateY(50px);
+  }
+}
+
+.bg-clip-text {
+  -webkit-background-clip: text;
+  background-clip: text;
 }

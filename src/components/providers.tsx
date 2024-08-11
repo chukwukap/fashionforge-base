@@ -1,7 +1,7 @@
 "use client";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { mainnet, sepolia, coreDao } from "viem/chains";
+import { mainnet, sepolia, baseSepolia } from "viem/chains";
 import { http } from "viem";
 
 import type { PrivyClientConfig } from "@privy-io/react-auth";
@@ -12,11 +12,11 @@ import { TooltipProvider } from "./ui/tooltip";
 const queryClient = new QueryClient();
 
 const wagmiConfig = createConfig({
-  chains: [mainnet, sepolia, coreDao],
+  chains: [mainnet, sepolia, baseSepolia],
   transports: {
     [mainnet.id]: http(),
     [sepolia.id]: http(),
-    [coreDao.id]: http(),
+    [baseSepolia.id]: http(),
   },
 });
 
@@ -30,8 +30,8 @@ const privyConfig: PrivyClientConfig = {
     },
     noPromptOnSignature: false,
   },
-  defaultChain: coreDao,
-  supportedChains: [mainnet, sepolia, coreDao],
+  defaultChain: baseSepolia,
+  supportedChains: [mainnet, sepolia, baseSepolia],
   appearance: {
     showWalletLoginFirst: true,
     theme: "light",
