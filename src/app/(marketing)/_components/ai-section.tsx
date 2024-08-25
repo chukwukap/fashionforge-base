@@ -11,23 +11,23 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import {
-  BrainIcon,
-  TrendingUpIcon,
-  PaletteIcon,
+  ChartBarIcon,
+  SwatchIcon,
   SparklesIcon,
-  ZapIcon,
-  RefreshCwIcon,
-} from "lucide-react";
+  BoltIcon,
+  ArrowPathIcon,
+  LightBulbIcon,
+} from "@heroicons/react/24/outline";
 
 const aiFeatures = [
   {
-    icon: TrendingUpIcon,
+    icon: ChartBarIcon,
     title: "Trend Forecasting",
     description:
       "Stay ahead of the curve with AI-powered fashion trend predictions.",
   },
   {
-    icon: PaletteIcon,
+    icon: SwatchIcon,
     title: "Color Palette Suggestions",
     description:
       "Get AI-generated color palettes that resonate with current trends.",
@@ -39,13 +39,13 @@ const aiFeatures = [
       "Receive personalized style suggestions based on user preferences and market trends.",
   },
   {
-    icon: ZapIcon,
+    icon: BoltIcon,
     title: "Design Optimization",
     description:
       "Optimize your designs for various factors like sustainability and production efficiency.",
   },
   {
-    icon: RefreshCwIcon,
+    icon: ArrowPathIcon,
     title: "Automated Iterations",
     description:
       "Generate multiple design variations quickly with AI assistance.",
@@ -109,7 +109,7 @@ const AISection: React.FC = () => {
           <Card className="max-w-2xl mx-auto bg-primary text-primary-foreground">
             <CardHeader>
               <CardTitle className="flex items-center justify-center space-x-2">
-                <BrainIcon className="w-6 h-6" />
+                <LightBulbIcon className="w-6 h-6" />
                 <span>AI Design Assistant</span>
               </CardTitle>
             </CardHeader>

@@ -15,12 +15,12 @@ const data = [
   { name: "Vintage Floral Blouse", value: 200 },
 ];
 
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+const COLORS = ["#60A5FA", "#34D399", "#FBBF24", "#F87171"];
 
 export function DesignPopularity() {
   return (
-    <div className="rounded-lg bg-white p-6 shadow-lg">
-      <h2 className="mb-4 text-lg font-semibold text-gray-800">
+    <div className="rounded-lg bg-gray-800 p-6 shadow-lg">
+      <h2 className="mb-4 text-lg font-semibold text-white">
         Design Popularity
       </h2>
       <div className="h-80">
@@ -42,8 +42,19 @@ export function DesignPopularity() {
                 />
               ))}
             </Pie>
-            <Tooltip />
-            <Legend />
+            <Tooltip
+              contentStyle={{
+                backgroundColor: "#1F2937",
+                border: "none",
+                borderRadius: "0.375rem",
+                color: "#F3F4F6",
+              }}
+            />
+            <Legend
+              wrapperStyle={{
+                color: "#F3F4F6",
+              }}
+            />
           </PieChart>
         </ResponsiveContainer>
       </div>

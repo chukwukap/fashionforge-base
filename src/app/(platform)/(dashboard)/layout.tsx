@@ -8,7 +8,7 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex h-screen bg-gradient-to-br from-purple-900 via-indigo-900 to-blue-900 text-white">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white flex h-screen">
       <CollapsibleSidebar />
       <div className="flex-1 flex flex-col overflow-hidden">
         <DashboardHeader

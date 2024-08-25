@@ -40,37 +40,37 @@ export const AuthWrapper: React.FC<AuthWrapperProps> = ({
 
   useEffect(() => {
     if (authenticated && user) {
-      checkUserRole(user.id);
+      // checkUserRole(user.id);
     }
   }, [authenticated, user]);
 
-  if (!ready) {
-    return <div>Loading...</div>;
-  }
+  // if (!ready) {
+  //   return <div>Loading...</div>;
+  // }
 
-  if (!authenticated) {
-    login();
-    return null;
-  }
+  // if (!authenticated) {
+  //   login();
+  //   return null;
+  // }
 
-  if (isNewUser === null || userRole === null) {
-    return <div>Checking user status...</div>;
-  }
+  // if (isNewUser === null || userRole === null) {
+  //   return <div>Checking user status...</div>;
+  // }
 
-  if (isNewUser && user) {
-    return (
-      <UserTypeSelection
-        userId={user.id}
-        setUserRole={setUserRole}
-        setIsNewUser={setIsNewUser}
-      />
-    );
-  }
+  // if (isNewUser && user) {
+  //   return (
+  //     <UserTypeSelection
+  //       userId={user.id}
+  //       setUserRole={setUserRole}
+  //       setIsNewUser={setIsNewUser}
+  //     />
+  //   );
+  // }
 
-  if (allowedRoles && !allowedRoles.includes(userRole)) {
-    router.push("/unauthorized");
-    return null;
-  }
+  // if (allowedRoles && !allowedRoles.includes(userRole)) {
+  //   router.push("/unauthorized");
+  //   return null;
+  // }
 
   return <>{children}</>;
 };

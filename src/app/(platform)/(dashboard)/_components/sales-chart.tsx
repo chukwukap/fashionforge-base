@@ -21,10 +21,8 @@ const data = [
 
 export function SalesChart() {
   return (
-    <div className="rounded-lg bg-white p-6 shadow-lg">
-      <h2 className="mb-4 text-lg font-semibold text-gray-800">
-        Sales Overview
-      </h2>
+    <div className="rounded-lg bg-gray-800 p-6 shadow-lg">
+      <h2 className="mb-4 text-lg font-semibold text-white">Sales Overview</h2>
       <div className="h-80">
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart
@@ -36,23 +34,32 @@ export function SalesChart() {
               bottom: 0,
             }}
           >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
+            <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+            <XAxis dataKey="name" stroke="#9CA3AF" />
+            <YAxis stroke="#9CA3AF" />
+            <Tooltip
+              contentStyle={{
+                backgroundColor: "#1F2937",
+                border: "none",
+                borderRadius: "0.375rem",
+                color: "#F3F4F6",
+              }}
+            />
             <Area
               type="monotone"
               dataKey="sales"
               stackId="1"
-              stroke="#8884d8"
-              fill="#8884d8"
+              stroke="#60A5FA"
+              fill="#3B82F6"
+              fillOpacity={0.6}
             />
             <Area
               type="monotone"
               dataKey="nftSales"
               stackId="1"
-              stroke="#82ca9d"
-              fill="#82ca9d"
+              stroke="#34D399"
+              fill="#10B981"
+              fillOpacity={0.6}
             />
           </AreaChart>
         </ResponsiveContainer>

@@ -1,3 +1,4 @@
+// frontend/src/app/(platform)/(dashboard)/_components/blockchain-activity.tsx
 import React from "react";
 import { motion } from "framer-motion";
 import { TrendingUp, Clock, DollarSign } from "lucide-react";
@@ -28,10 +29,10 @@ const transactions = [
 
 export function BlockchainActivity() {
   return (
-    <div className="overflow-hidden rounded-lg bg-white shadow-lg">
-      <div className="bg-gradient-to-r from-indigo-100 to-blue-100 px-7 py-4">
-        <h2 className="flex items-center gap-2 text-lg font-semibold text-gray-800">
-          <TrendingUp className="h-5 w-5 text-indigo-500" />
+    <div className="overflow-hidden rounded-lg bg-gray-800 shadow-lg">
+      <div className="bg-gradient-to-r from-gray-700 to-gray-800 px-7 py-4">
+        <h2 className="flex items-center gap-2 text-lg font-semibold text-white">
+          <TrendingUp className="h-5 w-5 text-blue-400" />
           Blockchain Activity
         </h2>
       </div>
@@ -43,27 +44,28 @@ export function BlockchainActivity() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: index * 0.1 }}
-              className="flex items-center justify-between border-b border-gray-100 pb-4 last:border-b-0 last:pb-0"
+              className="flex items-center justify-between border-b border-gray-700 pb-4 last:border-b-0 last:pb-0"
             >
               <div className="flex items-center gap-4">
-                <div className="rounded-full bg-indigo-100 p-2">
-                  <DollarSign className="h-5 w-5 text-indigo-600" />
+                <div className="rounded-full bg-gray-700 p-2">
+                  <DollarSign className="h-5 w-5 text-blue-400" />
                 </div>
                 <div>
-                  <p className="text-sm text-gray-500">{tx.amount}</p>
+                  <p className="text-sm font-medium text-white">{tx.type}</p>
+                  <p className="text-sm text-gray-400">{tx.amount}</p>
                 </div>
               </div>
               <div className="text-right">
                 <p
                   className={`text-sm font-medium ${
                     tx.status === "Completed"
-                      ? "text-green-600"
-                      : "text-yellow-600"
+                      ? "text-green-400"
+                      : "text-yellow-400"
                   }`}
                 >
                   {tx.status}
                 </p>
-                <p className="flex items-center text-xs text-gray-500">
+                <p className="flex items-center text-xs text-gray-400">
                   <Clock className="mr-1 h-3 w-3" />
                   {tx.time}
                 </p>

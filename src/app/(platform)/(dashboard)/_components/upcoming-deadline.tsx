@@ -46,33 +46,31 @@ const deadlines: Deadline[] = [
 ];
 
 const urgencyColors = {
-  low: "bg-green-100 text-green-800",
-  medium: "bg-amber-100 text-amber-800",
-  high: "bg-red-100 text-red-800",
+  low: "bg-green-900 text-green-300",
+  medium: "bg-yellow-900 text-yellow-300",
+  high: "bg-red-900 text-red-300",
 };
 
 export default function UpcomingDeadlines() {
   return (
-    <div className="overflow-hidden rounded-lg bg-white shadow-lg">
-      <div className="bg-gradient-to-r from-amber-100 to-amber-50 px-6 py-4">
-        <h2 className="flex items-center gap-2 text-lg font-semibold text-amber-800">
-          <AlertTriangle className="h-5 w-5" />
+    <div className="overflow-hidden rounded-lg bg-gray-800 shadow-lg">
+      <div className="bg-gradient-to-r from-gray-700 to-gray-800 px-6 py-4">
+        <h2 className="flex items-center gap-2 text-lg font-semibold text-white">
+          <AlertTriangle className="h-5 w-5 text-yellow-400" />
           Upcoming Deadlines
         </h2>
       </div>
-      <ul className="divide-y divide-amber-100">
+      <ul className="divide-y divide-gray-700">
         {deadlines.map((deadline) => (
           <li
             key={deadline.id}
-            className="p-4 hover:bg-amber-50/50 transition-colors"
+            className="p-4 hover:bg-gray-700/50 transition-colors"
           >
             <div className="flex justify-between items-start mb-1">
               <div className="flex flex-col">
-                <span className="font-medium text-amber-900">
-                  {deadline.title}
-                </span>
-                <div className="flex items-center text-sm text-amber-700 mt-1">
-                  <CalendarDays className="h-4 w-4" />
+                <span className="font-medium text-white">{deadline.title}</span>
+                <div className="flex items-center text-sm text-gray-300 mt-1">
+                  <CalendarDays className="h-4 w-4 mr-1" />
                   {deadline.date}
                   <Clock className="h-4 w-4 ml-3 mr-1" />
                   {deadline.time}
@@ -87,13 +85,13 @@ export default function UpcomingDeadlines() {
               </span>
             </div>
             <div className="mt-2">
-              <div className="flex justify-between text-sm mb-1 text-amber-800">
+              <div className="flex justify-between text-sm mb-1 text-gray-300">
                 <span>Progress</span>
                 <span>{deadline.progress}%</span>
               </div>
-              <div className="h-2 bg-amber-100 rounded-full overflow-hidden">
+              <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-amber-500 rounded-full"
+                  className="h-full bg-blue-500 rounded-full"
                   style={{ width: `${deadline.progress}%` }}
                 />
               </div>

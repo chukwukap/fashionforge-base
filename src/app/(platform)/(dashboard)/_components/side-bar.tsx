@@ -68,8 +68,8 @@ export const CollapsibleSidebar: React.FC = () => {
               href={item.href}
               className={`flex items-center p-2 rounded-lg transition-colors duration-200 ${
                 isActive
-                  ? "bg-white bg-opacity-20 text-white"
-                  : "text-gray-300 hover:bg-white hover:bg-opacity-10 hover:text-white"
+                  ? "bg-gray-700 text-blue-400"
+                  : "text-gray-300 hover:bg-gray-800 hover:text-blue-400"
               }`}
             >
               <item.icon className="w-6 h-6 mr-4" />
@@ -89,7 +89,7 @@ export const CollapsibleSidebar: React.FC = () => {
 
   return (
     <nav
-      className={`h-screen bg-gradient-to-b from-purple-900 to-indigo-900 overflow-hidden z-10 transition-all duration-300 ease-in-out ${
+      className={`h-screen bg-gray-900 overflow-hidden z-10 transition-all duration-300 ease-in-out ${
         isExpanded ? "w-64" : "w-16"
       }`}
       onMouseEnter={() => setIsExpanded(true)}

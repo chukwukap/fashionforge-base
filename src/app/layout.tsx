@@ -6,6 +6,7 @@ import "./globals.css";
 import Providers from "@/components/providers";
 
 import { Toaster } from "@/components/ui/sonner";
+import AppClient from "./appClient";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,7 +25,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Providers>
           <Toaster />
-          <div>{children}</div>
+          <AppClient>{children}</AppClient>
         </Providers>
       </body>
     </html>
